@@ -1,4 +1,4 @@
-# Désinscription Etudaint : Moodle plugin
+# Désinscription Etudiant : Moodle plugin
 
 Ce plugin est compatible avec Moodle 3.1 ou plus.
 
