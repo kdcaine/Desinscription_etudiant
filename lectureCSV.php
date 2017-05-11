@@ -56,27 +56,24 @@ session_start();
 // Lecture fichier csv.
 echo '<br>';
 
-if(isset($_POST['upload'])) {
+if (isset($_POST['upload'])) {
     $fname = $_FILES['sel_file']['name'];
     echo '<br>';
     echo 'Fichier csv uploader: '.$fname.' ';
     $chkext = explode(".", $fname);
 
-    if(strtolower(end($chkext)) == "csv") {
+    if (strtolower(end($chkext)) == "csv") {
         $filename = $_FILES['sel_file']['tmp_name'];
         $handle = fopen($filename, "r");
-       
         if (($data = fgetcsv($handle, 1000, ";")) !== false) {
             echo '<br>';
             echo '<br>';
 
             if ($data[1] == 1) {
                 $typeinscription = 'manual';
-            }
-            else {
+            } else {
                 $typeinscription = 'self';
-            }
-            
+            }            
             if ($data[2] == 1) {
                 $role = 'étudiant';
             }
@@ -104,9 +101,7 @@ if(isset($_POST['upload'])) {
         }
         fclose($handle);
         echo '<br>';
-    }
-    else
-    {
+    } else {
         echo "Aucun fichier présent ou fichier invalide !";
     }
 }
