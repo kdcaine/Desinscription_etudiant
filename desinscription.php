@@ -49,7 +49,7 @@ session_start();
 <?php
         $idcourstrouver = $_SESSION['idcours'];
         $table = 'user_enrolments';
-        $conditions = array('enrolid'=>$idcourstrouver);
+        $conditions = array('enrolid' => $idcourstrouver);
 
         $suppetudiant = $DB->delete_records($table, $conditions);
 ?>
@@ -70,6 +70,6 @@ session_start();
     </body>
 </html>  
 
-<?php 
+<?php
 // Display the footer.
 echo $OUTPUT->footer();

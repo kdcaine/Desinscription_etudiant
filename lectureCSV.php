@@ -56,45 +56,37 @@ session_start();
 // Lecture fichier csv.
 echo '<br>';
 
-if(isset($_POST['upload']))
-{
+if(isset($_POST['upload'])) {
     $fname = $_FILES['sel_file']['name'];
     echo '<br>';
     echo 'Fichier csv uploader: '.$fname.' ';
-    $chkext = explode(".",$fname);
-        
-        if(strtolower(end($chkext)) == "csv")
-        {
-        
-            $filename = $_FILES['sel_file']['tmp_name'];
-            $handle = fopen($filename, "r");
+    $chkext = explode(".", $fname);
+
+    if(strtolower(end($chkext)) == "csv") {
+        $filename = $_FILES['sel_file']['tmp_name'];
+        $handle = fopen($filename, "r");
        
-            if (($data = fgetcsv($handle, 1000, ";")) !== false)
-            {
-                echo '<br>';
-                echo '<br>';
+        if (($data = fgetcsv($handle, 1000, ";")) !== false) {
+            echo '<br>';
+            echo '<br>';
 
-                if ($data[1] == 1)
-                {
-                    $typeinscription = 'manual';
-                }
-                else
-                {
-                    $typeinscription = 'self';
-                }
-
-                if ($data[2] == 1)
-                {
-                    $role = 'étudiant';
-                }
-
-                echo "nom du cours : " .$data[0];
-                echo '<br>';
-                echo "Type d'inscription : " .$typeinscription;
-                echo '<br>';
-                echo "role : " .$role;
-                echo '<br>';
-                $idcours = $DB->get_records_sql('SELECT {enrol}.id
+            if ($data[1] == 1) {
+                $typeinscription = 'manual';
+            }
+            else {
+                $typeinscription = 'self';
+            }
+            
+            if ($data[2] == 1) {
+                $role = 'étudiant';
+            }
+            echo "nom du cours : " .$data[0];
+            echo '<br>';
+            echo "Type d'inscription : " .$typeinscription;
+            echo '<br>';
+            echo "role : " .$role;
+            echo '<br>';
+            $idcours = $DB->get_records_sql('SELECT {enrol}.id
                                                 FROM {enrol}, {course}
                                                 WHERE {enrol}.enrol = ?
                                                 AND {enrol}.courseid = {course}.id
@@ -102,24 +94,22 @@ if(isset($_POST['upload']))
                                                 array($typeinscription, $data[0])
                                               );
 
-                foreach ($idcours as $cours) 
-                {
-                    $cours2 = $cours->id;
-                }
-
-                $idcours1 = $cours2;
-
-                $_SESSION['idcours'] = $idcours1;
-                $_SESSION['nomCours'] = $data[0];
+            foreach ($idcours as $cours) {
+                $cours2 = $cours->id;
             }
-            fclose($handle);
-            echo '<br>';
+            $idcours1 = $cours2;
+
+            $_SESSION['idcours'] = $idcours1;
+            $_SESSION['nomCours'] = $data[0];
         }
-        else
-        {
-             echo "Aucun fichier présent ou fichier invalide !";
-        }
+        fclose($handle);
+        echo '<br>';
     }
+    else
+    {
+        echo "Aucun fichier présent ou fichier invalide !";
+    }
+}
 ?>
 
 <!DOCTYPE html>

@@ -63,7 +63,7 @@ global $DB;
             <br />
             <center><h4>Notice d'utilisation : </h4></center>
 
-            <p>Votre fichier doit contenir l'extension ".csv" et le fichier doit etre ecrit au format "nomCours; methode d'inscription; rôles"</p>
+            <p>Votre fichier est au format ".csv" et il doit etre ecrit au format "nomCours; methode d'inscription; rôles"</p>
             <p>Voici un exemple :</p>
             <center><p>TER2017;1;1</p></center>
 
