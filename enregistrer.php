@@ -43,7 +43,7 @@ echo $OUTPUT->header();
 global $DB;
 
 
-//test de recuperation de donner en plusieurs pages
+// Test de recuperation de donner en plusieurs pages.
 session_start();
 
 ?>
@@ -59,7 +59,8 @@ session_start();
             <center>
 
             <br />
-            <h5> En cliquant sur ce bouton, vous validez la désinscription et vous aurez sur votre bureau un fichier listant tous les étudiant que vous avez désinscrit ainsi que le nom du cours : </h5>
+            <h5> En cliquant sur ce bouton, vous validez la désinscription </h5>
+            <h5>vous aurez sur votre bureau un fichier listant tous les étudiant que vous avez désinscrit ainsi que le nom du cours : </h5>
             <form name="y" action="desinscription.php" method="post">
                 <input type="submit" value="Valider la Désinscription">
             </form>
@@ -72,23 +73,15 @@ session_start();
             
             </center>
     </body>
-</html>  
+</html>
 
 <?php
 // Display the footer.
 echo $OUTPUT->footer();
 
-    
+// Enregistrer le resultat de la requete de suppression.
+$idcourstrouver = $_SESSION['idcours'];
+$courstrouver = $_SESSION['nomCours'];
 
-    //enregistrer le resultat de la requete de suppression :
-    $idCoursTrouver = $_SESSION['idcours']; 
-    $coursTrouver = $_SESSION['nomCours'];
-
-    $sql2 = "SELECT DISTINCT username, firstname, lastname , email , shortname from {user}, {user_enrolments}, {course} WHERE enrolid ='$idCoursTrouver'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$coursTrouver'  INTO OUTFILE 'C:/Users/kdcaine/Desktop/suppression.csv' FIELDS TERMINATED BY ';' ENCLOSED BY '' LINES TERMINATED BY '\n'"; 
-
-    $sql3 = $DB->get_record_sql($sql2);
-
-?>
-
-
-
+$sql2 = "SELECT DISTINCT username, firstname, lastname , email , shortname from {user}, {user_enrolments}, {course} WHERE enrolid ='$idcourstrouver'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$courstrouver'  INTO OUTFILE 'C:/Users/kdcaine/Desktop/suppression.csv' FIELDS TERMINATED BY ';' ENCLOSED BY '' LINES TERMINATED BY '\n'";
+$sql3 = $DB->get_record_sql($sql2);
