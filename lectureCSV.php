@@ -73,7 +73,7 @@ if (isset($_POST['upload'])) {
                 $typeinscription = 'manual';
             } else {
                 $typeinscription = 'self';
-            }            
+            }
             if ($data[2] == 1) {
                 $role = 'étudiant';
             }
