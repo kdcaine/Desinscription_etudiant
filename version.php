@@ -29,4 +29,4 @@ $plugin->version  = 2017042500;
 $plugin->release = '1.0';
 $plugin->requires = 2015051103;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->component = 'tool_desinscription_etudiant';//nom complet du plugin (pour diagnostic)
+$plugin->component = 'tool_desinscription_etudiant';// Nom complet du plugin (pour diagnostic).
