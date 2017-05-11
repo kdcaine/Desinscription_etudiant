@@ -28,7 +28,6 @@ require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/tablelib.php');
 require_once(dirname(__FILE__).'/version.php');
 require_once("$CFG->libdir/dml/moodle_database.php");
-//include('index.php');
 
 admin_externalpage_setup('tool_desinscription_etudiant');
 
@@ -51,58 +50,60 @@ global $DB;
 <?php
 
 
-//recuperation de donner en plusieurs pages
+// Recuperation de donner en plusieurs pages.
 session_start();
 
-//---------------------------- Lecture fichier csv ---------------------
+// Lecture fichier csv.
 echo '<br>';
 
-    if(isset($_POST['upload']))
-    {
-         $fname = $_FILES['sel_file']['name'];
-         echo '<br>';
-         echo 'Fichier csv uploader: '.$fname.' ';
-         $chk_ext = explode(".",$fname);
+if(isset($_POST['upload']))
+{
+    $fname = $_FILES['sel_file']['name'];
+    echo '<br>';
+    echo 'Fichier csv uploader: '.$fname.' ';
+    $chkext = explode(".",$fname);
         
-         if(strtolower(end($chk_ext)) == "csv")
-         {
+        if(strtolower(end($chkext)) == "csv")
+        {
         
-             $filename = $_FILES['sel_file']['tmp_name'];
-             $handle = fopen($filename, "r");
+            $filename = $_FILES['sel_file']['tmp_name'];
+            $handle = fopen($filename, "r");
        
-             if (($data = fgetcsv($handle, 1000, ";")) !== FALSE)
-             {
+            if (($data = fgetcsv($handle, 1000, ";")) !== false)
+            {
                 echo '<br>';
                 echo '<br>';
 
-                if($data[1]==1){
-                    $typeInscription = 'manual';
+                if ($data[1] == 1)
+                {
+                    $typeinscription = 'manual';
                 }
-                else{
-                    $typeInscription = 'self';
+                else
+                {
+                    $typeinscription = 'self';
                 }
 
-                if($data[2]==1){
-                    $role = 'étudiant' ;
+                if ($data[2] == 1)
+                {
+                    $role = 'étudiant';
                 }
 
                 echo "nom du cours : " .$data[0];
                 echo '<br>';
-                echo "Type d'inscription : " .$typeInscription;
+                echo "Type d'inscription : " .$typeinscription;
                 echo '<br>';
                 echo "role : " .$role;
                 echo '<br>';
-                         
-                $idcours = $DB->get_records_sql('SELECT {enrol}.id 
+                $idcours = $DB->get_records_sql('SELECT {enrol}.id
                                                 FROM {enrol}, {course}
                                                 WHERE {enrol}.enrol = ?
                                                 AND {enrol}.courseid = {course}.id
                                                 AND {course}.shortname = ?',
-                                                //array( 'manual' , 'S4IN206')
-                                                array($typeInscription, $data[0])
-                                              ); 
+                                                array($typeinscription, $data[0])
+                                              );
 
-                foreach ($idcours as $cours) {
+                foreach ($idcours as $cours) 
+                {
                     $cours2 = $cours->id;
                 }
 
@@ -110,16 +111,15 @@ echo '<br>';
 
                 $_SESSION['idcours'] = $idcours1;
                 $_SESSION['nomCours'] = $data[0];
-
-             }
-             fclose($handle);
-             echo '<br>';            
-         }
-         else
-         {
+            }
+            fclose($handle);
+            echo '<br>';
+        }
+        else
+        {
              echo "Aucun fichier présent ou fichier invalide !";
-         }   
-    }   
+        }
+    }
 ?>
 
 <!DOCTYPE html>
