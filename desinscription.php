@@ -47,21 +47,14 @@ session_start();
         <h1>Désinscription final :</h1> 
     </center>
 <?php
-
-        $idCoursTrouver = $_SESSION['idcours']; 
+        $idcourstrouver = $_SESSION['idcours'];
         $table = 'user_enrolments';
-        $conditions = array('enrolid'=> $idCoursTrouver);
+        $conditions = array('enrolid'=>$idcourstrouver);
 
-        $suppEtudiant = $DB->delete_records($table, $conditions); 
-  
-
-
+        $suppetudiant = $DB->delete_records($table, $conditions);
 ?>
-
-
 <!DOCTYPE html>
 <html>
-    
     <body>
 
             <br />
@@ -76,10 +69,7 @@ session_start();
 
     </body>
 </html>  
-            
 
- 
- <?php 
+<?php 
 // Display the footer.
 echo $OUTPUT->footer();
-?>
