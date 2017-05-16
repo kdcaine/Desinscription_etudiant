@@ -60,7 +60,7 @@ session_start();
 
             <br />
             <h5> En cliquant sur ce bouton, vous validez la désinscription </h5>
-            <h5>vous aurez sur votre bureau un fichier listant tous les étudiant que vous avez désinscrit ainsi que le nom du cours : </h5>
+            <h5>vous retrouverez un fichier listant tous les étudiants que vous avez désinscrit avec le cours</h5>
             <form name="y" action="desinscription.php" method="post">
                 <input type="submit" value="Valider la Désinscription">
             </form>
@@ -83,5 +83,9 @@ echo $OUTPUT->footer();
 $idcourstrouver = $_SESSION['idcours'];
 $courstrouver = $_SESSION['nomCours'];
 
-$sql2 = "SELECT DISTINCT username, firstname, lastname , email , shortname from {user}, {user_enrolments}, {course} WHERE enrolid ='$idcourstrouver'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$courstrouver'  INTO OUTFILE 'C:/Users/kdcaine/Desktop/suppression.csv' FIELDS TERMINATED BY ';' ENCLOSED BY '' LINES TERMINATED BY '\n'";
+$selection = 'username, firstname, lastname , email , shortname';
+$tableselectionner = '{user}, {user_enrolments}, {course}';
+$formatsauvegarde = "FIELDS TERMINATED BY ';' ENCLOSED BY '' LINES TERMINATED BY '\n'";
+
+$sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE enrolid ='$idCoursTrouver'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$coursTrouver'  INTO OUTFILE 'C:/Users/kdcaine/Desktop/suppression.csv' $formatsauvegarde";
 $sql3 = $DB->get_record_sql($sql2);
