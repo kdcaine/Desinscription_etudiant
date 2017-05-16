@@ -80,14 +80,14 @@ session_start();
 echo $OUTPUT->footer();
 
 // Enregistrer le resultat de la requete de suppression.
-$idcourstrouver = $_SESSION['idcours'];
-$courstrouver = $_SESSION['nomCours'];
+$idcourst = $_SESSION['idcours'];
+$courst = $_SESSION['nomCours'];
 
 $selection = 'username, firstname, lastname , email , shortname';
 $tableselectionner = '{user}, {user_enrolments}, {course}';
 $formatsauvegarde = "FIELDS TERMINATED BY ';' ENCLOSED BY '' ";
 $line = "LINES TERMINATED BY '\n'";
-$wherecondition = "enrolid ='$idcourstrouver'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$courstrouver'";
+$wherecondition = "enrolid ='$idcourst'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$courst'";
 $chemin = "'C:/Users/kdcaine/Desktop/suppression.csv'";
 
 $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition INTO OUTFILE $chemin $formatsauvegarde $line";
