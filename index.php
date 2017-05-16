@@ -22,12 +22,7 @@
  */
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
-require_once($CFG->libdir.'/moodlelib.php');
 require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->libdir.'/formslib.php');
-require_once($CFG->libdir.'/tablelib.php');
-require_once(dirname(__FILE__).'/version.php');
-require_once("$CFG->libdir/dml/moodle_database.php");
 
 admin_externalpage_setup('tool_desinscription_etudiant');
 
@@ -36,11 +31,8 @@ $PAGE->set_pagelayout('admin');
 $strheading = get_string('pluginname', 'tool_desinscription_etudiant');
 $PAGE->set_title($strheading);
 $PAGE->set_heading('Désinscription d\'étudiant');
-$PAGE->set_pagelayout('standard');
 
 echo $OUTPUT->header();
-global $DB;
-
 
 ?>
 
