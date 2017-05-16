@@ -86,6 +86,6 @@ $courstrouver = $_SESSION['nomCours'];
 $selection = 'username, firstname, lastname , email , shortname';
 $tableselectionner = '{user}, {user_enrolments}, {course}';
 $formatsauvegarde = "FIELDS TERMINATED BY ';' ENCLOSED BY '' LINES TERMINATED BY '\n'";
-
-$sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE enrolid ='$idCoursTrouver'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$coursTrouver'  INTO OUTFILE 'C:/Users/kdcaine/Desktop/suppression.csv' $formatsauvegarde";
+$wherecondition = "enrolid ='$idCoursTrouver'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$coursTrouver'";
+$sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition INTO OUTFILE 'C:/Users/kdcaine/Desktop/suppression.csv' $formatsauvegarde";
 $sql3 = $DB->get_record_sql($sql2);
