@@ -58,7 +58,6 @@ echo $OUTPUT->header();
             <p>Votre fichier est au format ".csv" et il doit etre ecrit au format "nomCours; methode d'inscription; rôles"</p>
             <p>Voici un exemple :</p>
             <center><p>TER2017;1;1</p></center>
-
     </body>
 </html>  
 

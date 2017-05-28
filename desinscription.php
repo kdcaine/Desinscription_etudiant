@@ -41,13 +41,7 @@ session_start();
     <center>
         <h1>Désinscription final :</h1> 
     </center>
-<?php
-        $idcourstrouver = $_SESSION['idcours'];
-        $table = 'user_enrolments';
-        $conditions = array('enrolid' => $idcourstrouver);
 
-        $suppetudiant = $DB->delete_records($table, $conditions);
-?>
 <!DOCTYPE html>
 <html>
     <body>
@@ -58,9 +52,14 @@ session_start();
 
             <p> Pour revenir à la page principal cliquer sur le bouton ci-dessous</p>
             <!-- Bouton de redirection à la page principale du plugin --> 
-            <center><form name="x" action="index.php" method="post">
+            <center>
+            <form name="x" action="suppIndex.php" method="post">
                 <input type="submit" value="Page accueil">
-            </form></center>
+            </form>
+            <br /><br /><br />
+            <a href="#" onClick='f=window.open("savePopUp.php","fenetre","width=300, height=300") '>
+                Sauvegarder fichier log</a>
+            </center>
 
     </body>
 </html>  

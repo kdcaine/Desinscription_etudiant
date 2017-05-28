@@ -15,65 +15,41 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * enregistrer.php
+ * savePopUp.php
  *
  * @package    tool_description_etudiant
  * @copyright  2017 Puagnol André John
  */
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
-require_once($CFG->libdir.'/adminlib.php');
 require_once("$CFG->libdir/dml/moodle_database.php");
-
-admin_externalpage_setup('tool_desinscription_etudiant');
-
-$PAGE->set_context(context_system::instance());
-$PAGE->set_pagelayout('admin');
-$strheading = get_string('pluginname', 'tool_desinscription_etudiant');
-$PAGE->set_title($strheading);
-$PAGE->set_heading('Désinscription d\'étudiant');
 
 echo $OUTPUT->header();
 
 global $DB;
-
 
 // Test de recuperation de donner en plusieurs pages.
 session_start();
 
 ?>
 <html>
-
-    <center>
-        <h1>Enregistrement de la suppression :</h1> 
-    </center>
-
-
     <body>
             <!-- Bouton de redirection à la page principale du plugin --> 
             <center>
 
             <br />
-            <h5> En cliquant sur ce bouton, vous validez la désinscription </h5>
-            <h5>vous retrouverez un fichier listant tous les étudiants que vous avez désinscrit avec le cours</h5>
-            <form name="y" action="desinscription.php" method="post">
-                <input type="submit" value="Valider la Désinscription">
-            </form>
-
-            <br />
-            <h5>Pour annuler et revenir à la page d'acceuil veuillez cliquer sur ce lien : </h5>
-            <form name="x" action="index.php" method="post">
-                <input type="submit" value="Page accueil">
-            </form>
+            <h5> Validation désinscription </h5>
             
+            <h5>Vous retrouverez sur votre bureau la liste des étudiants désinscrit</h5>
+            <form name="x" action="suppression.php" method="post">
+                <input type="submit" value="Quitter">
+            </form>
+           
             </center>
     </body>
 </html>
 
 <?php
-// Display the footer.
-echo $OUTPUT->footer();
-
 // Enregistrer le resultat de la requete de suppression.
 $idcourst = $_SESSION['idcours'];
 $courst = $_SESSION['nomCours'];
@@ -87,3 +63,5 @@ $chemin = "'C:/Users/kdcaine/Desktop/suppression.csv'";
 
 $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition INTO OUTFILE $chemin $formatsauvegarde $line";
 $sql3 = $DB->get_record_sql($sql2);
+
+

@@ -111,12 +111,7 @@ if (isset($_POST['upload'])) {
            
            <!-- Execution de l'enregistrement avant la desinscription' --> 
             <form name="y" action="desinscription.php" method="post">
-                <input type="submit" value="Désinscrire sans sauvegarder">
-            </form>
-
-            <!-- Execution de l'enregistrement avant la desinscription' --> 
-            <form name="y" action="enregistrer.php" method="post">
-                <input type="submit" value="Désinscrire et sauvegarder">
+                <input type="submit" value="Valider la désinscription">
             </form>
 
             <!-- Bouton pour annuler le processus --> 
