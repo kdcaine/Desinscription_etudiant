@@ -24,12 +24,12 @@
 require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 require_once("$CFG->libdir/dml/moodle_database.php");
 
-echo $OUTPUT->header();
-
 global $DB;
 
 // Test de recuperation de donner en plusieurs pages.
 session_start();
+
+header('Location: telechargement.php');
 
 $idcourstrouver = $_SESSION['idcours'];
 $table = 'user_enrolments';

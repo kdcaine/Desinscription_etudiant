@@ -47,19 +47,19 @@ session_start();
     <body>
 
             <br />
-            <h4> La désinscription est un succès </h4>
-
-
-            <p> Pour revenir à la page principal cliquer sur le bouton ci-dessous</p>
-            <!-- Bouton de redirection à la page principale du plugin --> 
+            <h4> Validation final pour la désinscription </h4>
+            <br />
+            <p> En cliquant sur ce bouton ci-dessous, vous allez valider la désinscription et revenir sur la page principal :</p>
+            <!-- Bouton de redirection à la page principale du plugin -->
+            <br />
             <center>
             <form name="x" action="suppIndex.php" method="post">
-                <input type="submit" value="Page accueil">
+                <input type="submit" value="DESINSCRIRE">
             </form>
-            <br /><br /><br />
-            <a href="#" onClick='f=window.open("savePopUp.php","fenetre","width=300, height=300") '>
-                Sauvegarder fichier log</a>
             </center>
+            <br /><br /><br />
+            <p> Si vous souhaitez obtenir une sauvegarde des etudiants désinscrit, veuillez cliquer =>
+            <a href="#" onClick='f=window.open("savePopUp.php","fenetre","width=300, height=300") '><font color="red">ICI</font></a></p>
 
     </body>
 </html>  

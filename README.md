@@ -5,6 +5,7 @@ Ce plugin est compatible avec Moodle 3.1 ou plus.
 ## Installation
 
 Pour installer votre plugin il faudra suivre ces étapes :
+
     - se connecter en mode admin
     - se rendre à l'onglet Administration du site
     - puis Plugins
@@ -13,7 +14,6 @@ Pour installer votre plugin il faudra suivre ces étapes :
     - suivre les étapes et voila votre plugin ests prêt
 
 ## Accéder à son plugin
-
 Si votre installation s'est déroulé correctement voici comment se rendre à votre plugin.
 
     - Être connecter en admin

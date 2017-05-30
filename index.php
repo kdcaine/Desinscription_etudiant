@@ -33,7 +33,6 @@ $PAGE->set_title($strheading);
 $PAGE->set_heading('Désinscription d\'étudiant');
 
 echo $OUTPUT->header();
-
 ?>
 
 <!DOCTYPE html>
