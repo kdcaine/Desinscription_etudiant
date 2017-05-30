@@ -20,6 +20,9 @@
  * @package    tool_desinscription_etudiant
  * @copyright  2017 Puagnol André John
  */
+
+require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
+
 $a = getcwd().'\sauvegarde\"'. "\n";
 $b = substr($a, 0, -2);
 $c = str_replace("\\", "/", $b);
