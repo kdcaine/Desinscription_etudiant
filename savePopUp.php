@@ -62,7 +62,7 @@ $wherecondition = "enrolid ='$idcourst'and {user}.username != 'guest' and {user}
 // Obtention du dossier de sauvegarde en dynamique pour les multi-platerforme.
 $a = getcwd().'\sauvegarde\"'. "\n";
 $b = substr($a, 0, -2);
-$c = str_replace("\\","/",$b);
+$c = str_replace("\\", "/", $b);
 $chemin = $c.'suppression.csv';
 
 if (file_exists($chemin)) {
