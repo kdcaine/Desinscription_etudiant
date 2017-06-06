@@ -60,12 +60,17 @@ if (isset($_POST['upload'])) {
     if (strtolower(end($chkext)) == "csv") {
         $filename = $_FILES['sel_file']['tmp_name'];
         $handle = fopen($filename, "r");
-        if (($data = fgetcsv($handle, 1000, ";")) !== false) {
+
+        // Sauvegarde de toutes les données du fichier CSV dans un tableau.
+        $stockdonnee = array();
+
+        while (($data = fgetcsv($handle, 1000, ";")) !== false) {
             echo '<br>';
             echo '<br>';
 
-            if ($data[1] == 1) {
+            if ($data[1] == 'manual') {
                 $typeinscription = 'manual';
+
             } else {
                 $typeinscription = 'self';
             }
@@ -78,24 +83,41 @@ if (isset($_POST['upload'])) {
             echo '<br>';
             echo "role : " .$role;
             echo '<br>';
+
+            array_push($stockdonnee, $data);
+        }
+        fclose($handle);
+        echo '<br>';
+        
+        // Récupère la taille du taille contenant toute les variables du fichier csv.
+        // Dans notre cas la valeur sera de 2 car j'ai que deux cours a supprimer.
+        $_SESSION['$taille'] = count($stockdonnee);
+
+
+        // Création des sessions sous forme de tableau.
+        $_SESSION['idcours'] = array();
+        $_SESSION['nomCours'] = array();
+
+        for ($c = 0; $c < $_SESSION['$taille']; $c++) {
             $idcours = $DB->get_records_sql('SELECT {enrol}.id
                                                 FROM {enrol}, {course}
                                                 WHERE {enrol}.enrol = ?
                                                 AND {enrol}.courseid = {course}.id
                                                 AND {course}.shortname = ?',
-                                                array($typeinscription, $data[0])
+                                                array($stockdonnee[$c][1], $stockdonnee[$c][0])
                                               );
-
             foreach ($idcours as $cours) {
                 $cours2 = $cours->id;
             }
             $idcours1 = $cours2;
 
-            $_SESSION['idcours'] = $idcours1;
-            $_SESSION['nomCours'] = $data[0];
+            // Affectations de l'id cours obtenue par la requete dans le tableau.
+            $_SESSION['idcours'][$c] = $idcours1;
+
+
+            // Insertion du nom du cours dans le tableau.
+            $_SESSION['nomCours'][$c] = $stockdonnee[$c][0];
         }
-        fclose($handle);
-        echo '<br>';
     } else {
         echo "Aucun fichier présent ou fichier invalide !";
     }
@@ -109,7 +131,7 @@ if (isset($_POST['upload'])) {
 
             <center>
            
-            <!-- Execution de l'enregistrement avant la desinscription' --> 
+           <!-- Execution de l'enregistrement avant la desinscription' --> 
             <form name="y" action="desinscription.php" method="post">
                 <input type="submit" value="Valider les cours ci-dessus">
             </form>

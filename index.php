@@ -54,9 +54,22 @@ echo $OUTPUT->header();
             <br />
             <center><h4>Notice d'utilisation : </h4></center>
 
-            <p>Votre fichier est au format ".csv" et il doit etre ecrit au format "nomCours; methode d'inscription; rôles"</p>
-            <p>Voici un exemple :</p>
-            <center><p>TER2017;1;1</p></center>
+            <p>Votre fichier est au format ".csv" et il doit etre ecrit sous forme "nomCours; methode d'inscription; rôles"</p>
+            <p>Nous avons différent méthode d'inscription :</p>
+            <ul>
+              <li>manual</li>
+              <li>self</li>
+              <li>guest</li>
+            </ul>
+            <p>Voici les différent rôles possibles :</p>
+            <ul>
+              <li>1 : Etudiant</li>
+              <li>2 : Enseignant</li>
+              <li>3 : Enseignant non éditeur</li>
+            </ul>
+            <br />
+            <p>Voici un exemple d'écriture acceptable pour votre fichier :</p>
+            <center><p>monCours;manual;1</p></center>
     </body>
 </html>  
 

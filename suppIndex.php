@@ -29,10 +29,21 @@ global $DB;
 // Test de recuperation de donner en plusieurs pages.
 session_start();
 
-$idcourstrouver = $_SESSION['idcours'];
-$table = 'user_enrolments';
-$conditions = array('enrolid' => $idcourstrouver);
+?>
+<html>
+    <body onload="setTimeout(window.close, 3000)">
+            <center>
+            	<h2> Désinscription réussi </h2>
+            </center>
+    </body>
+</html>
 
-$suppetudiant = $DB->delete_records($table, $conditions);
+<?php
+for ($c = 0; $c <$_SESSION['$taille']; $c++) {
+	
+	$idcourstrouver = $_SESSION['idcours'][$c];
+	$table = 'user_enrolments';
+	$conditions = array('enrolid' => $idcourstrouver);
 
-header('Location: index.php');
+	$suppetudiant = $DB->delete_records($table, $conditions);
+}

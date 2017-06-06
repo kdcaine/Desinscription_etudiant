@@ -33,14 +33,13 @@ session_start();
 
 ?>
 <html>
-    <body>
+    <body onload="setTimeout(window.close, 10000)">
             <!-- Bouton de redirection à la page principale du plugin --> 
             <center>
 
             <br />
-            <h5> Validation désinscription </h5>
+            <h5> Merci de valider pour la désinscription </h5>
             
-            <h5>Vous retrouverez dans votre dossier de téléchargement la liste des étudiants désinscrit</h5>
             <form name="x" action="suppression.php" method="post">
                 <input type="submit" value="Confirmer">
             </form>
@@ -51,23 +50,28 @@ session_start();
 
 <?php
 // Enregistrer le resultat de la requete de suppression.
-$idcourst = $_SESSION['idcours'];
-$courst = $_SESSION['nomCours'];
 
-$selection = 'username, firstname, lastname , email , shortname';
-$tableselectionner = '{user}, {user_enrolments}, {course}';
-$formatsauvegarde = "FIELDS TERMINATED BY ';' ENCLOSED BY '' ";
-$line = "LINES TERMINATED BY '\n'";
-$wherecondition = "enrolid ='$idcourst'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$courst'";
-// Obtention du dossier de sauvegarde en dynamique pour les multi-platerforme.
-$a = getcwd().'\sauvegarde\"'. "\n";
-$b = substr($a, 0, -2);
-$c = str_replace("\\", "/", $b);
-$chemin = $c.'suppression.csv';
+for ($c = 0; $c < $_SESSION['$taille']; $c++) {
 
-if (file_exists($chemin)) {
-    unlink($chemin);
+    $idcourst = $_SESSION['idcours'][$c];
+    $courst = $_SESSION['nomCours'][$c];
+
+    $selection = 'username, firstname, lastname , email , shortname';
+    $tableselectionner = '{user}, {user_enrolments}, {course}';
+    $formatsauvegarde = "FIELDS TERMINATED BY ';' ENCLOSED BY '' ";
+    $line = "LINES TERMINATED BY '\n'";
+    $wherecondition = "enrolid ='$idcourst'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$courst'";
+
+    // Obtention du dossier de sauvegarde en dynamique pour les multi-platerforme.
+    $a = getcwd().'\sauvegarde\"'. "\n";
+    $b = substr($a, 0, -2);
+    $c = str_replace("\\", "/", $b);
+    $chemin = $c.'suppression.csv';
+
+    if (file_exists($chemin)) {
+        unlink($chemin);
+    }
+
+    $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition INTO OUTFILE '$chemin' $formatsauvegarde $line";
+    $sql3 = $DB->get_record_sql($sql2);
 }
-
-$sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition INTO OUTFILE '$chemin' $formatsauvegarde $line";
-$sql3 = $DB->get_record_sql($sql2);

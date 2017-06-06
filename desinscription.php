@@ -36,30 +36,95 @@ $PAGE->set_heading('Désinscription d\'étudiant');
 echo $OUTPUT->header();
 
 global $DB;
+
+// Recuperation de donner en plusieurs pages.
 session_start();
+
 ?>
-    <center>
-        <h1>Désinscription final :</h1> 
-    </center>
+
 
 <!DOCTYPE html>
 <html>
+    <center>
+        <h1>Désinscription final :</h1> 
+    </center>
     <body>
 
             <br />
             <h4> Validation final pour la désinscription </h4>
             <br />
+            <p> Voici la liste des étudiant sélectionner pour la désinscription accompagner du cours :</p>
+            
+            <div style="overflow:scroll; border:#7FDD4C 3px solid;">
+            <center>
+            <table>
+                <tr>
+                   <th>Numero étudiant</th>
+                   <th>Prénom</th>
+                   <th>Nom</th>
+                   <th>Cours</th>
+                </tr>
+                <tr>
+<?php
+// Tableau pour enregistrer les valeurs obtenue par la requete.
+$numEtudiant = array();
+$prenom = array();
+$nom = array();
+$cours = array();
+
+// Compteur pour enregistrer chaque valeur obtenue par la requete.
+$d = 0;
+
+for ($c = 0; $c < $_SESSION['$taille']; $c++) {
+
+    $idcourst = $_SESSION['idcours'][$c];
+    $courst = $_SESSION['nomCours'][$c];
+
+    $sql4 = " SELECT username, firstname, lastname, shortname FROM {enrol}, {user}, {user_enrolments}, {course} WHERE {user}.id = {user_enrolments}.userid AND {user}.username != 'guest' AND {user}.username != 'admin'AND {enrol}.id = {user_enrolments}.enrolid AND {user_enrolments}.enrolid ='$idcourst' AND shortname = '$courst'";
+    $sql5 = $DB->get_records_sql($sql4);
+
+    foreach ($sql5 as $liste)  {
+        $numEtudiant[$d][0] = $liste->username;
+        $prenom[$d][1] = $liste->firstname;
+        $nom[$d][2] = $liste->lastname;
+        $cours[$d][3] = $liste->shortname;
+        $d++;
+    }
+}
+    echo '<br />';
+
+for ($e = 0; $e < $d; $e++) {
+?>
+
+                    <td><?php echo $numEtudiant[$e][0]; ?></td>
+                    <td><?php echo $prenom[$e][1]; ?></td>
+                    <td><?php echo $nom[$e][2]; ?></td>
+                    <td><?php echo $cours[$e][3]; ?></td>
+                </tr>
+<?php
+}
+?>
+            </table>
+            </center>
+            </div>
+
+            <br />
             <p> En cliquant sur ce bouton ci-dessous, vous allez valider la désinscription et revenir sur la page principal :</p>
             <!-- Bouton de redirection à la page principale du plugin -->
             <br />
             <center>
-            <form name="x" action="suppIndex.php" method="post">
+            <form action="index.php" onsubmit="window.open('suppIndex.php','popup','width=200, height=10')"  method="post">
                 <input type="submit" value="DESINSCRIRE">
             </form>
             </center>
             <br /><br /><br />
-            <p> Si vous souhaitez obtenir une sauvegarde des etudiants désinscrit, veuillez cliquer =>
-            <a href="#" onClick='f=window.open("savePopUp.php","fenetre","width=300, height=300") '><font color="red">ICI</font></a></p>
+            <p> Si vous souhaitez obtenir une sauvegarde des etudiants désinscrit, veuillez cliquer ci-dessous : </p>
+
+            <center>
+                <form action="index.php" onsubmit="window.open('savePopUp.php','popup','width=300, height=300')" method="post">
+                    <input type="submit" value="DESINSCRIRE + LOG">
+                </form>
+            </center>
 
     </body>
 </html>  
