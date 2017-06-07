@@ -32,9 +32,9 @@ session_start();
 header('Location: telechargement.php');
 
 for ($c = 0; $c < $_SESSION['$taille']; $c++) {
-	$idcourstrouver = $_SESSION['idcours'][$c];
-	$table = 'user_enrolments';
-	$conditions = array('enrolid' => $idcourstrouver);
-	$suppetudiant = $DB->delete_records($table, $conditions);
+$idcourstrouver = $_SESSION['idcours'][$c];
+$table = 'user_enrolments';
+$conditions = array('enrolid' => $idcourstrouver);
+$suppetudiant = $DB->delete_records($table, $conditions);
 }
 echo "<script language='javascript'>window.close()</script>";

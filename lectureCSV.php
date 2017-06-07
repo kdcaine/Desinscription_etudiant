@@ -87,7 +87,7 @@ if (isset($_POST['upload'])) {
             array_push($stockdonnee, $data);
         }
         fclose($handle);
-        echo '<br>';        
+        echo '<br>';
         // Récupère la taille du taille contenant toute les variables du fichier csv.
         // Dans notre cas la valeur sera de 2 car j'ai que deux cours a supprimer.
         $_SESSION['$taille'] = count($stockdonnee);

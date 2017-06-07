@@ -33,15 +33,15 @@ session_start();
 <html>
     <body onload="setTimeout(window.close, 3000)">
             <center>
-            	<h2> Désinscription réussi </h2>
+            <h2> Désinscription réussi </h2>
             </center>
     </body>
 </html>
 
 <?php
 for ($c = 0; $c < $_SESSION['$taille']; $c++) {
-	$idcourstrouver = $_SESSION['idcours'][$c];
-	$table = 'user_enrolments';
-	$conditions = array('enrolid' => $idcourstrouver);
-	$suppetudiant = $DB->delete_records($table, $conditions);
+$idcourstrouver = $_SESSION['idcours'][$c];
+$table = 'user_enrolments';
+$conditions = array('enrolid' => $idcourstrouver);
+$suppetudiant = $DB->delete_records($table, $conditions);
 }
