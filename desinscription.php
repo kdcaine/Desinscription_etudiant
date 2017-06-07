@@ -67,7 +67,7 @@ session_start();
                 <tr>
 <?php
 // Tableau pour enregistrer les valeurs obtenue par la requete.
-$numEtudiant = array();
+$numetudiant = array();
 $prenom = array();
 $nom = array();
 $cours = array();
@@ -80,11 +80,16 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
     $idcourst = $_SESSION['idcours'][$c];
     $courst = $_SESSION['nomCours'][$c];
 
-    $sql4 = " SELECT username, firstname, lastname, shortname FROM {enrol}, {user}, {user_enrolments}, {course} WHERE {user}.id = {user_enrolments}.userid AND {user}.username != 'guest' AND {user}.username != 'admin'AND {enrol}.id = {user_enrolments}.enrolid AND {user_enrolments}.enrolid ='$idcourst' AND shortname = '$courst'";
+    $selection = 'username, firstname, lastname, shortname';
+    $table = '{enrol}, {user}, {user_enrolments}, {course}';
+    $condition1 = "{user}.id = {user_enrolments}.userid AND {user}.username != 'guest' AND {user}.username != 'admin'";
+    $condition2 = "{enrol}.id = {user_enrolments}.enrolid AND {user_enrolments}.enrolid ='$idcourst' AND shortname = '$courst'";
+
+    $sql4 = " SELECT $selection FROM $table WHERE $condition1 AND $condition2";
     $sql5 = $DB->get_records_sql($sql4);
 
-    foreach ($sql5 as $liste)  {
-        $numEtudiant[$d][0] = $liste->username;
+    foreach ($sql5 as $liste) {
+        $numetudiant[$d][0] = $liste->username;
         $prenom[$d][1] = $liste->firstname;
         $nom[$d][2] = $liste->lastname;
         $cours[$d][3] = $liste->shortname;
@@ -96,7 +101,7 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
 for ($e = 0; $e < $d; $e++) {
 ?>
 
-                    <td><?php echo $numEtudiant[$e][0]; ?></td>
+                    <td><?php echo $numetudiant[$e][0]; ?></td>
                     <td><?php echo $prenom[$e][1]; ?></td>
                     <td><?php echo $nom[$e][2]; ?></td>
                     <td><?php echo $cours[$e][3]; ?></td>

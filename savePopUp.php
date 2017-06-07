@@ -58,7 +58,7 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
 
     $selection = 'username, firstname, lastname , email , shortname';
     $tableselectionner = '{user}, {user_enrolments}, {course}';
-    $formatsauvegarde = "FIELDS TERMINATED BY ';' ENCLOSED BY '' ";
+    $formatsave = "FIELDS TERMINATED BY ';' ENCLOSED BY '' ";
     $line = "LINES TERMINATED BY '\n'";
     $wherecondition = "enrolid ='$idcourst'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$courst'";
 
@@ -72,6 +72,6 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
         unlink($chemin);
     }
 
-    $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition INTO OUTFILE '$chemin' $formatsauvegarde $line";
+    $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition INTO OUTFILE '$chemin' $formatsave $line";
     $sql3 = $DB->get_record_sql($sql2);
 }
