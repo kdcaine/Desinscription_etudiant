@@ -46,7 +46,7 @@ echo $OUTPUT->header();
             <br />
             <p>Veuillez uploader votre fichier à cet emplacement pour permettre la désinscription : </p>
             <br />
-            <form action="lectureCSV.php" method='post' enctype="multipart/form-data">
+            <form action="lecture.php" method='post' enctype="multipart/form-data">
                 Votre fichier : <input type='file' name='sel_file' size='20'>
                 <input type='submit' name='upload' value='envoyer'>
             </form>
@@ -54,21 +54,21 @@ echo $OUTPUT->header();
             <br />
             <center><h4>Notice d'utilisation : </h4></center>
 
-            <p>Votre fichier est au format ".csv" et il doit etre ecrit sous forme "nomCours; methode d'inscription; rôles"</p>
-            <p>Nous avons différent méthode d'inscription :</p>
+            <p>Votre fichier est au format ".csv" et il doit être écrit sous forme "nomCours; methode d'inscription; rôles"</p>
+            <p>Nous avons différentes méthodes d'inscription :</p>
             <ul>
-              <li>manual</li>
-              <li>self</li>
-              <li>guest</li>
+              <li>manual : ajout manuel par le professeur</li>
+              <li>self   : auto-inscription</li>
+              <li>guest  : invité</li>
             </ul>
-            <p>Voici les différent rôles possibles :</p>
+            <p>Voici les différents rôles possibles :</p>
             <ul>
               <li>1 : Etudiant</li>
               <li>2 : Enseignant</li>
               <li>3 : Enseignant non éditeur</li>
             </ul>
             <br />
-            <p>Voici un exemple d'écriture acceptable pour votre fichier :</p>
+            <p>Voici un exemple d'écriture pour une ligne votre fichier :</p>
             <center><p>monCours;manual;1</p></center>
     </body>
 </html>  

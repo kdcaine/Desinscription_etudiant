@@ -25,9 +25,8 @@ Si votre installation s'est déroulé correctement voici comment se rendre à vo
 
 ## License
 
-Ce plugin a été développé par Puagnol André John dans le cadre de son Travaux Etudes et de Recherches en Master 1 Informatique.
-Son encadrant de projet est Monsieur Sébastien Didier.
-L'ensemble des travaux réalisés dans le cadre du présent TER est de la propriété de l'Université de La Réunion.
+Ce plugin a été développé par Mo.  André John PUAGNOL dans le cadre de son Travail Etudes et de Recherches (TER) en Master 1 Informatique.
+Son encadrant de projet est M. Didier SEBASTIEN .
+L'ensemble des travaux réalisés dans le cadre du présent TER est la propriété de l'Université de La Réunion.
 
-Puagnol André John 
 
