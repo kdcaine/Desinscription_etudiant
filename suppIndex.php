@@ -39,11 +39,7 @@ session_start();
 </html>
 
 <?php
-for ($c = 0; $c < $_SESSION['$taille']; $c++) { 
-    // $table1 = 'role_assignments';
-    // $conditions1 = array('roleid' => 5);
-    // $suppetudiant = $DB->delete_records($table1, $conditions1);
-    
+for ($c = 0; $c < $_SESSION['$taille']; $c++) {
     $idcourstrouver = $_SESSION['idcours'][$c];
     $table = 'user_enrolments';
     $conditions = array('enrolid' => $idcourstrouver);

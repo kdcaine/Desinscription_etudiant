@@ -23,7 +23,7 @@ Si votre installation s'est déroulé correctement voici comment se rendre à vo
     - Enfin votre plugin : "Désinscription étudiant"
 
 
-## License
+## Licence
 
 Ce plugin a été développé par Mo.  André John PUAGNOL dans le cadre de son Travail Etudes et de Recherches (TER) en Master 1 Informatique.
 Son encadrant de projet est M. Didier SEBASTIEN .
