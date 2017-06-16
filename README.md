@@ -22,6 +22,12 @@ Si votre installation s'est déroulé correctement voici comment se rendre à vo
     - Serveur
     - Enfin votre plugin : "Désinscription étudiant"
 
+## Fonctionnalités de plugin de désinscription :
+
+    - Reconnu et fonctionnel lors de l’installation du plugin
+    - Lit les informations contenues dans le fichier listant les cours au format CSV
+    - Désinscrit les étudiants des cours contenus dans le fichier précédent
+    - Possibilité d’obtenir un fichier log contenant la liste des étudiants désinscrits accompagnée du cours
 
 ## Licence
 
