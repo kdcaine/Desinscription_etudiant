@@ -61,7 +61,7 @@ $cours = array();
 $f = 0;
 
 // Enregistrer le resultat de la requete de suppression.
-for ($c = 0; $c <  $_SESSION['$taille']; $c++) {
+for ($c = 0; $c < $_SESSION['$taille']; $c++) {
 
     $idcourst = $_SESSION['idcours'][$c];
     $courst = $_SESSION['nomCours'][$c];
@@ -83,7 +83,6 @@ for ($c = 0; $c <  $_SESSION['$taille']; $c++) {
     }
 
     $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition ";
-    
     $sql3 = $DB->get_records_sql($sql2);
 
     foreach ($sql3 as $liste) {
@@ -101,13 +100,13 @@ $monfichier = fopen($chemin, 'a+');
 // Boucle pour écrire dans le fichier log.
 for ($e = 0; $e < $f; $e++) {
     fputs($monfichier, $numetudiant[$e][0]);
-    fputs($monfichier,';');
+    fputs($monfichier, ';');
     fputs($monfichier, $prenom[$e][1]);
-    fputs($monfichier,';');
+    fputs($monfichier, ';');
     fputs($monfichier, $nom[$e][2]);
-    fputs($monfichier,';');
+    fputs($monfichier, ';');
     fputs($monfichier, $email[$e][3]);
-    fputs($monfichier,';');
+    fputs($monfichier, ';');
     fputs($monfichier, $cours[$e][4]);
-    fputs($monfichier,"\n");
+    fputs($monfichier, "\n");
 }
