@@ -122,7 +122,6 @@ if (isset($_POST['upload'])) {
             // Affectations de l'id cours obtenue par la requete dans le tableau.
             $_SESSION['idcours'][$c] = $idcours1;
 
-
             // Insertion du nom du cours dans le tableau.
             $_SESSION['nomCours'][$c] = $stockdonnee[$c][0];
         }
@@ -189,6 +188,7 @@ for ($e = 0; $e < $d; $e++) {
 <?php
 }
 ?>
+                 
             </table>
             </center>
             </div>

@@ -49,9 +49,19 @@ session_start();
 </html>
 
 <?php
-// Enregistrer le resultat de la requete de suppression.
 
-for ($c = 0; $c < $_SESSION['$taille']; $c++) {
+// Tableau pour enregistrer les valeurs obtenue par la requete.
+$numetudiant = array();
+$prenom = array();
+$nom = array();
+$email = array();
+$cours = array();
+
+// Compteur pour enregistrer chaque valeur obtenue par la requete.
+$f = 0;
+
+// Enregistrer le resultat de la requete de suppression.
+for ($c = 0; $c <  $_SESSION['$taille']; $c++) {
 
     $idcourst = $_SESSION['idcours'][$c];
     $courst = $_SESSION['nomCours'][$c];
@@ -65,13 +75,39 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
     // Obtention du dossier de sauvegarde en dynamique pour les multi-platerforme.
     $a = getcwd().'\sauvegarde\"'. "\n";
     $b = substr($a, 0, -2);
-    $c = str_replace("\\", "/", $b);
-    $chemin = $c.'suppression.csv';
+    $d = str_replace("\\", "/", $b);
+    $chemin = $d.'suppression.csv';
 
     if (file_exists($chemin)) {
         unlink($chemin);
     }
 
-    $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition INTO OUTFILE '$chemin' $formatsave $line";
-    $sql3 = $DB->get_record_sql($sql2);
+    $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition ";
+    
+    $sql3 = $DB->get_records_sql($sql2);
+
+    foreach ($sql3 as $liste) {
+        $numetudiant[$f][0] = $liste->username;
+        $prenom[$f][1] = $liste->firstname;
+        $nom[$f][2] = $liste->lastname;
+        $email[$f][3] = $liste->email;
+        $cours[$f][4] = $liste->shortname;
+        $f++;
+    }
+}
+// Création du fichier log.
+$monfichier = fopen($chemin, 'a+');
+
+// Boucle pour écrire dans le fichier log.
+for ($e = 0; $e < $f; $e++) {
+    fputs($monfichier, $numetudiant[$e][0]);
+    fputs($monfichier,';');
+    fputs($monfichier, $prenom[$e][1]);
+    fputs($monfichier,';');
+    fputs($monfichier, $nom[$e][2]);
+    fputs($monfichier,';');
+    fputs($monfichier, $email[$e][3]);
+    fputs($monfichier,';');
+    fputs($monfichier, $cours[$e][4]);
+    fputs($monfichier,"\n");
 }
