@@ -39,7 +39,7 @@ session_start();
 </html>
 
 <?php
-$ici = array();
+$idusertrouver = array();
 
 for ($c = 0; $c < $_SESSION['$taille']; $c++) {
     $f = 0;
@@ -55,9 +55,9 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
                                         array($idcourstrouver, 2)
                                     );
     foreach ($useridtrouver as $requete) {
-        $ici[$f] = $requete->userid;
+        $idusertrouver[$f] = $requete->userid;
         $table = 'user_enrolments';
-        $conditions = array('enrolid' => $idcourstrouver, 'userid' => $ici[$f]);
+        $conditions = array('enrolid' => $idcourstrouver, 'userid' => $idusertrouver[$f]);
         $suppetudiant = $DB->delete_records($table, $conditions);
         $f++;
     }
