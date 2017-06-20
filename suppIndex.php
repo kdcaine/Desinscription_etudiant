@@ -31,7 +31,7 @@ session_start();
 
 ?>
 <html>
-    <body onload="setTimeout(window.close, 3000)">
+    <body onload="setTimeout(window.close, 3000)"> 
             <center>
             <h2> Désinscription réussi </h2>
             </center>
@@ -39,9 +39,26 @@ session_start();
 </html>
 
 <?php
-for ($c = 0; $c < $_SESSION['$taille']; $c++) {
+$ici = array();
+
+for ($c = 0; $c < $_SESSION['$taille']; $c++) { 
+    $f = 0;
     $idcourstrouver = $_SESSION['idcours'][$c];
-    $table = 'user_enrolments';
-    $conditions = array('enrolid' => $idcourstrouver);
-    $suppetudiant = $DB->delete_records($table, $conditions);
+
+    $useridtrouver = $DB->get_records_sql('SELECT {user_enrolments}.userid
+                                        FROM {user}, {user_enrolments}, {enrol}, {course} 
+                                        WHERE {user}.id = {user_enrolments}.userid
+                                        AND {enrol}.id = {user_enrolments}.enrolid
+                                        AND {user_enrolments}.enrolid = ?
+                                        AND {course}.id = {enrol}.courseid
+                                        AND {user_enrolments}.userid != ?',
+                                        array($idcourstrouver, 2)
+                                    );
+    foreach ($useridtrouver as $requete) {
+        $ici[$f] = $requete->userid;
+        $table = 'user_enrolments';
+        $conditions = array('enrolid' => $idcourstrouver, 'userid' => $ici[$f]);
+        $suppetudiant = $DB->delete_records($table, $conditions);
+        $f++;
+    }
 }
