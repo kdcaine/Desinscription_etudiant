@@ -41,12 +41,12 @@ session_start();
 <?php
 $ici = array();
 
-for ($c = 0; $c < $_SESSION['$taille']; $c++) { 
+for ($c = 0; $c < $_SESSION['$taille']; $c++) {
     $f = 0;
     $idcourstrouver = $_SESSION['idcours'][$c];
 
     $useridtrouver = $DB->get_records_sql('SELECT {user_enrolments}.userid
-                                        FROM {user}, {user_enrolments}, {enrol}, {course} 
+                                        FROM {user}, {user_enrolments}, {enrol}, {course}
                                         WHERE {user}.id = {user_enrolments}.userid
                                         AND {enrol}.id = {user_enrolments}.enrolid
                                         AND {user_enrolments}.enrolid = ?
