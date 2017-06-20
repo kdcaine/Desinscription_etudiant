@@ -39,25 +39,46 @@ session_start();
 </html>
 
 <?php
-$idusertrouver = array();
+$idusertrouveretudiantfinale = array();
 
 for ($c = 0; $c < $_SESSION['$taille']; $c++) {
     $f = 0;
     $idcourstrouver = $_SESSION['idcours'][$c];
+    $nomcours = $_SESSION['nomCours'][$c];
 
-    $useridtrouver = $DB->get_records_sql('SELECT {user_enrolments}.userid
+
+    // Requete pour retrouver l'id des profs pour ne pas les supprimer.
+    $useridtrouverprof = $DB->get_records_sql('SELECT DISTINCT {user_enrolments}.userid
+                                        FROM {role}, {role_assignments}, {user}, {user_enrolments}, {enrol}, {course}
+                                        WHERE {role_assignments}.userid = {user}.id
+                                        AND {role}.id = {role_assignments}.roleid
+                                        AND {role_assignments}.roleid = ?
+                                        AND {user}.id = {user_enrolments}.userid
+                                        AND {enrol}.id = {user_enrolments}.enrolid
+                                        AND {user_enrolments}.enrolid = ?
+                                        AND {course}.id = {enrol}.courseid
+                                        AND {course}.shortname != ?',
+                                        array(3, $idcourstrouver, '$nomcours')
+                                    );
+
+    foreach ($useridtrouverprof as $idprof) {
+        $idproftrouver = $idprof->userid;
+    }
+
+    // Requete pour retrouver l'id des étudiants pour les supprimer.
+    $useridtrouveretudiant = $DB->get_records_sql('SELECT {user_enrolments}.userid
                                         FROM {user}, {user_enrolments}, {enrol}, {course}
                                         WHERE {user}.id = {user_enrolments}.userid
                                         AND {enrol}.id = {user_enrolments}.enrolid
                                         AND {user_enrolments}.enrolid = ?
                                         AND {course}.id = {enrol}.courseid
                                         AND {user_enrolments}.userid != ?',
-                                        array($idcourstrouver, 2)
+                                        array($idcourstrouver, $idproftrouver)
                                     );
-    foreach ($useridtrouver as $requete) {
-        $idusertrouver[$f] = $requete->userid;
+    foreach ($useridtrouveretudiant as $requete) {
+        $idusertrouveretudiantfinale[$f] = $requete->userid;
         $table = 'user_enrolments';
-        $conditions = array('enrolid' => $idcourstrouver, 'userid' => $idusertrouver[$f]);
+        $conditions = array('enrolid' => $idcourstrouver, 'userid' => $idusertrouveretudiantfinale[$f]);
         $suppetudiant = $DB->delete_records($table, $conditions);
         $f++;
     }
