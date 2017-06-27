@@ -97,7 +97,7 @@ if (isset($_POST['upload'])) {
                 // Id du rôle du tuteur.
                 $_SESSION['$role2'][$compterole] = 4;
                 $compterole++;
-            } elseif ($data[2] == 2) {
+            } else if ($data[2] == 2) {
                 $role = 'enseignant';
                 $_SESSION['$role0'][$compterole] = 3;
                 // Id du rôle de l'étudiant.

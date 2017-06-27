@@ -68,8 +68,7 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
         $idusertrouver[$p] = $idgarder->userid;
         $p++;
     }
-
-    for ($q = 0; $q < $p ; $q++) {
+    for ($q = 0; $q < $p; $q++) {
         // Requete pour retrouver l'id des user pour les supprimer.
         $useridtrouverasupp = $DB->get_records_sql('SELECT DISTINCT {user_enrolments}.userid
                                         FROM {user}, {user_enrolments}, {enrol}, {course}, {role_assignments}, {role}
@@ -81,8 +80,8 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
                                         AND {role_assignments}.roleid = ?
                                         AND {role_assignments}.userid = {user}.id
                                         AND {role}.id = {role_assignments}.roleid',
-                                        array($idcourstrouver, $idusertrouver[$q],$role)
-                                    ); 
+                                        array($idcourstrouver, $idusertrouver[$q], $role)
+                                    );
     }
     foreach ($useridtrouverasupp as $requete) {
         $idusertrouverasuppfinale[$f] = $requete->userid;
