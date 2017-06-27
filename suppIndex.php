@@ -26,12 +26,11 @@ require_once("$CFG->libdir/dml/moodle_database.php");
 
 global $DB;
 
-// Test de recuperation de donner en plusieurs pages.
 session_start();
 
 ?>
 <html>
-    <body onload="setTimeout(window.close, 3000)"> 
+    <body onload="setTimeout(window.close, 3000)">
             <center>
             <h2> Désinscription réussi </h2>
             </center>
@@ -39,46 +38,56 @@ session_start();
 </html>
 
 <?php
-$idusertrouveretudiantfinale = array();
+
+$idusertrouverasuppfinale = array();
+$idusertrouver = array();
 
 for ($c = 0; $c < $_SESSION['$taille']; $c++) {
     $f = 0;
     $idcourstrouver = $_SESSION['idcours'][$c];
     $nomcours = $_SESSION['nomCours'][$c];
 
+    // On récupère le rôle depuis le fichier CSV.
+    $role = $_SESSION['$role0'][$c];
 
-    // Requete pour retrouver l'id des profs pour ne pas les supprimer.
-    $useridtrouverprof = $DB->get_records_sql('SELECT DISTINCT {user_enrolments}.userid
+    // Requete pour retrouver l'id des users pour ne pas les supprimer.
+    $useridtrouveragarder = $DB->get_records_sql("SELECT DISTINCT {user_enrolments}.userid
                                         FROM {role}, {role_assignments}, {user}, {user_enrolments}, {enrol}, {course}
                                         WHERE {role_assignments}.userid = {user}.id
                                         AND {role}.id = {role_assignments}.roleid
-                                        AND {role_assignments}.roleid = ?
+                                        AND {role_assignments}.roleid != ?
                                         AND {user}.id = {user_enrolments}.userid
                                         AND {enrol}.id = {user_enrolments}.enrolid
                                         AND {user_enrolments}.enrolid = ?
-                                        AND {course}.id = {enrol}.courseid
-                                        AND {course}.shortname != ?',
-                                        array(3, $idcourstrouver, '$nomcours')
+                                        AND {course}.shortname = ?
+                                        AND {course}.id = {enrol}.courseid",
+                                        array($role, $idcourstrouver, $nomcours)
                                     );
-
-    foreach ($useridtrouverprof as $idprof) {
-        $idproftrouver = $idprof->userid;
+    $p = 0;
+    foreach ($useridtrouveragarder as $idgarder) {
+        $idusertrouver[$p] = $idgarder->userid;
+        $p++;
     }
 
-    // Requete pour retrouver l'id des étudiants pour les supprimer.
-    $useridtrouveretudiant = $DB->get_records_sql('SELECT {user_enrolments}.userid
-                                        FROM {user}, {user_enrolments}, {enrol}, {course}
+    for ($q = 0; $q < $p ; $q++) {
+        // Requete pour retrouver l'id des user pour les supprimer.
+        $useridtrouverasupp = $DB->get_records_sql('SELECT DISTINCT {user_enrolments}.userid
+                                        FROM {user}, {user_enrolments}, {enrol}, {course}, {role_assignments}, {role}
                                         WHERE {user}.id = {user_enrolments}.userid
                                         AND {enrol}.id = {user_enrolments}.enrolid
                                         AND {user_enrolments}.enrolid = ?
                                         AND {course}.id = {enrol}.courseid
-                                        AND {user_enrolments}.userid != ?',
-                                        array($idcourstrouver, $idproftrouver)
-                                    );
-    foreach ($useridtrouveretudiant as $requete) {
-        $idusertrouveretudiantfinale[$f] = $requete->userid;
+                                        AND {user_enrolments}.userid != ?
+                                        AND {role_assignments}.roleid = ?
+                                        AND {role_assignments}.userid = {user}.id
+                                        AND {role}.id = {role_assignments}.roleid',
+                                        array($idcourstrouver, $idusertrouver[$q],$role)
+                                    ); 
+    }
+    foreach ($useridtrouverasupp as $requete) {
+        $idusertrouverasuppfinale[$f] = $requete->userid;
         $table = 'user_enrolments';
-        $conditions = array('enrolid' => $idcourstrouver, 'userid' => $idusertrouveretudiantfinale[$f]);
+        $conditions = array('enrolid' => $idcourstrouver, 'userid' => $idusertrouverasuppfinale[$f]);
         $suppetudiant = $DB->delete_records($table, $conditions);
         $f++;
     }

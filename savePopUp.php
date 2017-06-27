@@ -65,12 +65,14 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
 
     $idcourst = $_SESSION['idcours'][$c];
     $courst = $_SESSION['nomCours'][$c];
+    $role = $_SESSION['$role0'][$c];
 
-    $selection = 'username, firstname, lastname , email , shortname';
-    $tableselectionner = '{user}, {user_enrolments}, {course}';
-    $formatsave = "FIELDS TERMINATED BY ';' ENCLOSED BY '' ";
-    $line = "LINES TERMINATED BY '\n'";
-    $wherecondition = "enrolid ='$idcourst'and {user}.username != 'guest' and {user}.username != 'admin'and shortname = '$courst'";
+    $selection = 'username, firstname, lastname, email, {course}.shortname';
+    $tableselectionner = '{enrol}, {user}, {user_enrolments}, {course}, {role}, {role_assignments}';
+    $condition0 = "{role_assignments}.userid = {user}.id AND {role}.id = {role_assignments}.roleid";
+    $condition1 = "{role_assignments}.roleid = '$role'";
+    $condition2 = "{user}.id = {user_enrolments}.userid AND {enrol}.id = {user_enrolments}.enrolid";
+    $condition3 = " {user_enrolments}.enrolid ='$idcourst' AND {course}.shortname = '$courst'";
 
     // Obtention du dossier de sauvegarde en dynamique pour les multi-platerforme.
     $a = getcwd().'\sauvegarde\"'. "\n";
@@ -82,7 +84,7 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
         unlink($chemin);
     }
 
-    $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $wherecondition ";
+    $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $condition0 AND $condition1 AND $condition2 AND $condition3";
     $sql3 = $DB->get_records_sql($sql2);
 
     foreach ($sql3 as $liste) {

@@ -68,7 +68,7 @@ echo $OUTPUT->header();
               <li>3 : Enseignant non éditeur</li>
             </ul>
             <br />
-            <p>Voici un exemple d'écriture pour une ligne votre fichier :</p>
+            <p>Voici un exemple d'écriture pour une ligne de votre fichier :</p>
             <center><p>monCours;manual;1</p></center>
     </body>
 </html>  

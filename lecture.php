@@ -72,6 +72,11 @@ if (isset($_POST['upload'])) {
 
         // Sauvegarde de toutes les données du fichier CSV dans un tableau.
         $stockdonnee = array();
+        // Sauvegarde des rôles des users à supprimer.
+        $_SESSION['$role0'] = array();
+        $_SESSION['$role1'] = array();
+        $_SESSION['$role2'] = array();
+        $compterole = 0;
 
         while (($data = fgetcsv($handle, 1000, ";")) !== false) {
             echo '<br>';
@@ -83,9 +88,35 @@ if (isset($_POST['upload'])) {
             } else {
                 $typeinscription = 'self';
             }
+
             if ($data[2] == 1) {
                 $role = 'étudiant';
+                $_SESSION['$role0'][$compterole] = 5;
+                // Id du rôle du prof.
+                $_SESSION['$role1'][$compterole] = 3;
+                // Id du rôle du tuteur.
+                $_SESSION['$role2'][$compterole] = 4;
+                $compterole++;
+            } elseif ($data[2] == 2) {
+                $role = 'enseignant';
+                $_SESSION['$role0'][$compterole] = 3;
+                // Id du rôle de l'étudiant.
+                $_SESSION['$role1'][$compterole] = 5;
+                // Id du rôle du tuteur.
+                $_SESSION['$role2'][$compterole] = 4;
+                $compterole++;
+            } else {
+                $role = 'tuteur';
+                $_SESSION['$role0'][$compterole] = 4;
+                // Id du rôle de l'étudiant.
+                $_SESSION['$role1'][$compterole] = 5;
+                // Id du rôle du professeur.
+                $_SESSION['$role2'][$compterole] = 3;
+                $compterole++;
             }
+
+
+
             echo "Nom du cours : " .$data[0];
             echo '<br>';
             echo "Type d'inscription : " .$typeinscription;
@@ -158,13 +189,16 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
 
     $idcourst = $_SESSION['idcours'][$c];
     $courst = $_SESSION['nomCours'][$c];
+    $role = $_SESSION['$role0'][$c];
 
-    $selection = 'username, firstname, lastname, shortname';
-    $table = '{enrol}, {user}, {user_enrolments}, {course}';
-    $condition1 = "{user}.id = {user_enrolments}.userid AND {user}.username != 'guest' AND {user}.username != 'admin'";
-    $condition2 = "{enrol}.id = {user_enrolments}.enrolid AND {user_enrolments}.enrolid ='$idcourst' AND shortname = '$courst'";
+    $selection = 'username, firstname, lastname, {course}.shortname';
+    $table = '{enrol}, {user}, {user_enrolments}, {course}, {role}, {role_assignments}';
+    $condition0 = "{role_assignments}.userid = {user}.id AND {role}.id = {role_assignments}.roleid";
+    $condition1 = "{role_assignments}.roleid = '$role'";
+    $condition2 = "{user}.id = {user_enrolments}.userid AND {enrol}.id = {user_enrolments}.enrolid";
+    $condition3 = " {user_enrolments}.enrolid ='$idcourst' AND {course}.shortname = '$courst'";
 
-    $sql4 = " SELECT $selection FROM $table WHERE $condition1 AND $condition2";
+    $sql4 = " SELECT $selection FROM $table WHERE $condition0 AND $condition1 AND $condition2 AND $condition3";
     $sql5 = $DB->get_records_sql($sql4);
 
     foreach ($sql5 as $liste) {
