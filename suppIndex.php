@@ -87,7 +87,7 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
         $idusertrouverasuppfinale[$f] = $requete->userid;
         $table = 'user_enrolments';
         $conditions = array('enrolid' => $idcourstrouver, 'userid' => $idusertrouverasuppfinale[$f]);
-        $suppetudiant = $DB->delete_records($table, $conditions);
+        $suppuser = $DB->delete_records($table, $conditions);
         $f++;
     }
 }

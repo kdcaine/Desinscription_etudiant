@@ -31,19 +31,19 @@ session_start();
 
 header('Location: telechargement.php');
 
-$idusertrouverasuppfinale = array();
-$idusertrouver = array();
+$idusersuppfinale = array();
+$idusert = array();
 
 for ($c = 0; $c < $_SESSION['$taille']; $c++) {
     $f = 0;
-    $idcourstrouver = $_SESSION['idcours'][$c];
+    $idcourst = $_SESSION['idcours'][$c];
     $nomcours = $_SESSION['nomCours'][$c];
 
     // On récupère le rôle depuis le fichier CSV.
     $role = $_SESSION['$role0'][$c];
 
     // Requete pour retrouver l'id des users pour ne pas les supprimer.
-    $useridtrouveragarder = $DB->get_records_sql("SELECT DISTINCT {user_enrolments}.userid
+    $useragarder = $DB->get_records_sql("SELECT DISTINCT {user_enrolments}.userid
                                         FROM {role}, {role_assignments}, {user}, {user_enrolments}, {enrol}, {course}
                                         WHERE {role_assignments}.userid = {user}.id
                                         AND {role}.id = {role_assignments}.roleid
@@ -53,16 +53,16 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
                                         AND {user_enrolments}.enrolid = ?
                                         AND {course}.shortname = ?
                                         AND {course}.id = {enrol}.courseid",
-                                        array($role, $idcourstrouver, $nomcours)
+                                        array($role, $idcourst, $nomcours)
                                     );
     $p = 0;
-    foreach ($useridtrouveragarder as $idgarder) {
-        $idusertrouver[$p] = $idgarder->userid;
+    foreach ($useragarder as $idgarder) {
+        $idusert[$p] = $idgarder->userid;
         $p++;
     }
     for ($q = 0; $q < $p; $q++) {
         // Requete pour retrouver l'id des user pour les supprimer.
-        $useridtrouverasupp = $DB->get_records_sql('SELECT DISTINCT {user_enrolments}.userid
+        $userasupp = $DB->get_records_sql('SELECT DISTINCT {user_enrolments}.userid
                                         FROM {user}, {user_enrolments}, {enrol}, {course}, {role_assignments}, {role}
                                         WHERE {user}.id = {user_enrolments}.userid
                                         AND {enrol}.id = {user_enrolments}.enrolid
@@ -72,15 +72,15 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
                                         AND {role_assignments}.roleid = ?
                                         AND {role_assignments}.userid = {user}.id
                                         AND {role}.id = {role_assignments}.roleid',
-                                        array($idcourstrouver, $idusertrouver[$q], $role)
+                                        array($idcourst, $idusert[$q], $role)
                                     );
     }
 
-    foreach ($useridtrouverasupp as $requete) {
-        $idusertrouverasuppfinale[$f] = $requete->userid;
+    foreach ($userasupp as $requete) {
+        $idusersuppfinale[$f] = $requete->userid;
         $table = 'user_enrolments';
-        $conditions = array('enrolid' => $idcourstrouver, 'userid' => $idusertrouverasuppfinale[$f]);
-        $suppetudiant = $DB->delete_records($table, $conditions);
+        $conditions = array('enrolid' => $idcourst, 'userid' => $idusersuppfinale[$f]);
+        $supp = $DB->delete_records($table, $conditions);
         $f++;
     }
 }
