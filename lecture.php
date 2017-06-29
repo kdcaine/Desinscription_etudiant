@@ -40,7 +40,7 @@ global $DB;
 
 ?>
     <center>
-        <h1>Lecture du fichier CSV fourni :</h1> 
+        <h1><?php echo get_string('titrelecture', 'tool_desinscription_etudiant'); ?></h1> 
     </center>
 <?php
 
@@ -63,7 +63,9 @@ echo '<br>';
 if (isset($_POST['upload'])) {
     $fname = $_FILES['sel_file']['name'];
     echo '<br>';
-    echo 'Fichier csv uploadé : '.$fname.' ';
+    $fileupload = get_string('filecsv', 'tool_desinscription_etudiant');
+    echo $fileupload.$fname.' ';
+
     $chkext = explode(".", $fname);
 
     if (strtolower(end($chkext)) == "csv") {
@@ -117,11 +119,12 @@ if (isset($_POST['upload'])) {
 
 
 
-            echo "Nom du cours : " .$data[0];
+            //echo "Nom du cours : " .$data[0];
+            echo get_string('namecours', 'tool_desinscription_etudiant').$data[0];
             echo '<br>';
-            echo "Type d'inscription : " .$typeinscription;
+            echo get_string('type', 'tool_desinscription_etudiant').$typeinscription;
             echo '<br>';
-            echo "Rôle : " .$role;
+            echo get_string('role', 'tool_desinscription_etudiant').$role;
             echo '<br>';
 
             array_push($stockdonnee, $data);
@@ -157,21 +160,21 @@ if (isset($_POST['upload'])) {
             $_SESSION['nomCours'][$c] = $stockdonnee[$c][0];
         }
     } else {
-        echo "Aucun fichier présent ou fichier invalide !";
+        echo get_string('novalide', 'tool_desinscription_etudiant');
     }
 }
 ?>
             <center>
-            <p> Voici la liste des étudiants sélectionné pour la désinscription :</p>
+            <p> <?php echo get_string('listeuser', 'tool_desinscription_etudiant'); ?></p>
             </center>
             <div style="overflow:scroll; border:#7FDD4C 3px solid;">
             <center>
             <table>
                 <tr>
                    <th>Login</th>
-                   <th>Prénom</th>
-                   <th>Nom</th>
-                   <th>Cours</th>
+                   <th><?php echo get_string('prenom', 'tool_desinscription_etudiant'); ?></th>
+                   <th><?php echo get_string('nom', 'tool_desinscription_etudiant'); ?></th>
+                   <th><?php echo get_string('cours', 'tool_desinscription_etudiant'); ?></th>
                 </tr>
                 <tr>
 <?php
@@ -231,7 +234,7 @@ for ($e = 0; $e < $d; $e++) {
             <br />
 
             <center>
-            <p> Merci de confirmer votre opération :</p>
+            <p><?php echo get_string('confirmer', 'tool_desinscription_etudiant'); ?></p>
            
 
             <!-- Bouton de redirection à la page principale du plugin -->
@@ -241,18 +244,18 @@ for ($e = 0; $e < $d; $e++) {
             <tr> 
             <td> 
             <form action="index.php" onsubmit="window.open('suppIndex.php','popup','width=200, height=10')"  method="post">
-                <input type="submit" value="DESINSCRIRE">
+                <input type="submit" value="<?php echo get_string('d', 'tool_desinscription_etudiant'); ?>">
             </form>
             </td>
             <td>
             <form action="index.php" onsubmit="window.open('savePopUp.php','popup','width=300, height=300')" method="post">
-                <input type="submit" value="DESINSCRIRE + LOG">
+                <input type="submit" value="<?php echo get_string('dl', 'tool_desinscription_etudiant'); ?>">
             </form>
             </td>
             <td>
             <!-- Bouton pour annuler le processus --> 
             <form name="x" action="index.php" method="post">
-                <input type="submit" value="Annuler">
+                <input type="submit" value="<?php echo get_string('annuler', 'tool_desinscription_etudiant'); ?>">
             </form>
             </td>
             </tr> 

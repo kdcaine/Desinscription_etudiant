@@ -39,37 +39,37 @@ echo $OUTPUT->header();
 <html>
     
     <center>
-        <h1>Système de désinscription d'étudiant :</h1> 
+        <h1><?php echo get_string('titreindex', 'tool_desinscription_etudiant'); ?></h1> 
     </center>
 
     <body>
             <br />
-            <p>Veuillez uploader votre fichier à cet emplacement pour permettre la désinscription : </p>
+            <p><?php echo get_string('emplacement', 'tool_desinscription_etudiant'); ?></p>
             <br />
             <form action="lecture.php" method='post' enctype="multipart/form-data">
-                Votre fichier : <input type='file' name='sel_file' size='20'>
-                <input type='submit' name='upload' value='envoyer'>
+                <?php echo get_string('fichier', 'tool_desinscription_etudiant'); ?><input type='file' name='sel_file' size='20'>
+                <input type='submit' name='upload' value="<?php echo get_string('envoyer', 'tool_desinscription_etudiant'); ?>">
             </form>
             <br />
             <br />
-            <center><h4>Notice d'utilisation : </h4></center>
+            <center><h4><?php echo get_string('notice', 'tool_desinscription_etudiant'); ?></h4></center>
 
-            <p>Votre fichier est au format ".csv" et il doit être écrit sous forme "nomCours; methode d'inscription; rôles"</p>
-            <p>Nous avons différentes méthodes d'inscription :</p>
+            <p><?php echo get_string('format', 'tool_desinscription_etudiant'); ?></p>
+            <p><?php echo get_string('methode', 'tool_desinscription_etudiant'); ?></p>
             <ul>
-              <li>manual : ajout manuel par le professeur</li>
-              <li>self   : auto-inscription</li>
-              <li>guest  : invité</li>
+              <li><?php echo get_string('methode1', 'tool_desinscription_etudiant'); ?></li>
+              <li><?php echo get_string('methode2', 'tool_desinscription_etudiant'); ?></li>
+              <li><?php echo get_string('methode3', 'tool_desinscription_etudiant'); ?></li>
             </ul>
-            <p>Voici les différents rôles possibles :</p>
+            <p><?php echo get_string('rolepossible', 'tool_desinscription_etudiant'); ?></p>
             <ul>
-              <li>1 : Etudiant</li>
-              <li>2 : Enseignant</li>
-              <li>3 : Enseignant non éditeur</li>
+              <li><?php echo get_string('role1', 'tool_desinscription_etudiant'); ?></li>
+              <li><?php echo get_string('role2', 'tool_desinscription_etudiant'); ?></li>
+              <li><?php echo get_string('role3', 'tool_desinscription_etudiant'); ?></li>
             </ul>
             <br />
-            <p>Voici un exemple d'écriture pour une ligne de votre fichier :</p>
-            <center><p>monCours;manual;1</p></center>
+            <p><?php echo get_string('noticeexemple', 'tool_desinscription_etudiant'); ?></p>
+            <center><p><?php echo get_string('example', 'tool_desinscription_etudiant'); ?></p></center>
     </body>
 </html>  
 

@@ -32,7 +32,7 @@ session_start();
 <html>
     <body onload="setTimeout(window.close, 3000)">
             <center>
-            <h2> Désinscription réussi </h2>
+            <h2> <?php echo get_string('titresuppi', 'tool_desinscription_etudiant'); ?> </h2>
             </center>
     </body>
 </html>

@@ -38,10 +38,10 @@ session_start();
             <center>
 
             <br />
-            <h5> Merci de valider pour la désinscription </h5>
+            <h5> <?php echo get_string('titresave', 'tool_desinscription_etudiant'); ?></h5>
             
             <form name="x" action="suppression.php" method="post">
-                <input type="submit" value="Confirmer">
+                <input type="submit" value="<?php echo get_string('boutonconfirmer', 'tool_desinscription_etudiant'); ?>">
             </form>
            
             </center>

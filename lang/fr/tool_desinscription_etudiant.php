@@ -23,6 +23,42 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-
 $string['pluginname'] = 'Desinscription étudiant';
 $string['maintitle'] = 'Affichage des cours suivi par un étudiant';
+// Traduction fichier index.
+$string['titreindex'] = "Système de désinscription d'étudiant :";
+$string['emplacement'] = 'Veuillez uploader votre fichier à cet emplacement pour permettre la désinscription : ';
+$string['fichier'] = 'Votre fichier : ';
+$string['envoyer'] = 'envoyer';
+$string['notice'] = "Notice d'utilisation : ";
+$string['format'] = "Votre fichier est au format '.csv' et il doit être écrit sous forme 'nomCours; methode d'inscription; rôles'";
+$string['methode'] = "Nous avons différentes méthodes d'inscription : ";
+$string['methode1'] = 'manual : ajout manuel par le professeur';
+$string['methode2'] = 'self   : auto-inscription';
+$string['methode3'] = 'guest  : invité';
+$string['rolepossible'] = 'Voici les différents rôles possibles :';
+$string['role1'] = '1 : Etudiant';
+$string['role2'] = '2 : Enseignant';
+$string['role3'] = '3 : Enseignant non éditeur';
+$string['noticeexemple'] = "Voici un exemple d'écriture pour une ligne de votre fichier : ";
+$string['example'] = 'monCours;manual;1';
+// Traduction fichier lecture.
+$string['titrelecture'] = 'Lecture du fichier CSV fourni :';
+$string['filecsv'] = 'Fichier csv uploadé : ';
+$string['namecours'] = 'Nom du cours : ';
+$string['type'] = "Type d'inscription : ";
+$string['role'] = 'Rôle : ';
+$string['novalide'] = 'Aucun fichier présent ou fichier invalide !';
+$string['listeuser'] = 'Voici la liste des utilisateurs sélectionné pour la désinscription :';
+$string['prenom'] = 'Prénom';
+$string['nom'] = 'Nom';
+$string['cours'] = 'Cours';
+$string['confirmer'] = 'Merci de confirmer votre opération : ';
+$string['d'] = 'DESINSCRIRE';
+$string['dl'] = 'DESINSCRIRE + LOG';
+$string['annuler'] = 'Annuler';
+// Traduction fichier savePopUp.
+$string['titresave'] = 'Merci de valider pour la désinscription ';
+$string['boutonconfirmer'] = 'Confirmer';
+// Traduction fichier suppIndex.
+$string['titresuppi'] = 'Désinscription réussi';
