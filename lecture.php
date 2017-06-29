@@ -117,9 +117,6 @@ if (isset($_POST['upload'])) {
                 $compterole++;
             }
 
-
-
-            //echo "Nom du cours : " .$data[0];
             echo get_string('namecours', 'tool_desinscription_etudiant').$data[0];
             echo '<br>';
             echo get_string('type', 'tool_desinscription_etudiant').$typeinscription;
