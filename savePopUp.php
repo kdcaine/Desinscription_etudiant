@@ -56,9 +56,37 @@ $prenom = array();
 $nom = array();
 $email = array();
 $cours = array();
+$roletrouver = array();
 
 // Compteur pour enregistrer chaque valeur obtenue par la requete.
 $f = 0;
+
+// Obtention du dossier de sauvegarde en dynamique pour les multi-platerforme.
+$a = getcwd().'\sauvegarde\"'. "\n";
+$b = substr($a, 0, -2);
+$d = str_replace("\\", "/", $b);
+$chemin = $d.'suppression.csv';
+
+if (file_exists($chemin)) {
+    unlink($chemin);
+}
+
+// Création du fichier log.
+$monfichier = fopen($chemin, 'a+');
+
+// Affichage première ligne log.
+fputs($monfichier, 'username');
+fputs($monfichier, ';');
+fputs($monfichier, 'firstname');
+fputs($monfichier, ';');
+fputs($monfichier, 'lastname');
+fputs($monfichier, ';');
+fputs($monfichier, 'email');
+fputs($monfichier, ';');
+fputs($monfichier, 'course1');
+fputs($monfichier, ';');
+fputs($monfichier, 'type1');
+fputs($monfichier, "\n");
 
 // Enregistrer le resultat de la requete de suppression.
 for ($c = 0; $c < $_SESSION['$taille']; $c++) {
@@ -67,22 +95,12 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
     $courst = $_SESSION['nomCours'][$c];
     $role = $_SESSION['$role0'][$c];
 
-    $selection = 'username, firstname, lastname, email, {course}.shortname';
+    $selection = 'username, firstname, lastname, email, {course}.shortname, {role}.id';
     $tableselectionner = '{enrol}, {user}, {user_enrolments}, {course}, {role}, {role_assignments}';
     $condition0 = "{role_assignments}.userid = {user}.id AND {role}.id = {role_assignments}.roleid";
     $condition1 = "{role_assignments}.roleid = '$role'";
     $condition2 = "{user}.id = {user_enrolments}.userid AND {enrol}.id = {user_enrolments}.enrolid";
     $condition3 = " {user_enrolments}.enrolid ='$idcourst' AND {course}.shortname = '$courst'";
-
-    // Obtention du dossier de sauvegarde en dynamique pour les multi-platerforme.
-    $a = getcwd().'\sauvegarde\"'. "\n";
-    $b = substr($a, 0, -2);
-    $d = str_replace("\\", "/", $b);
-    $chemin = $d.'suppression.csv';
-
-    if (file_exists($chemin)) {
-        unlink($chemin);
-    }
 
     $sql2 = "SELECT DISTINCT $selection from $tableselectionner WHERE $condition0 AND $condition1 AND $condition2 AND $condition3";
     $sql3 = $DB->get_records_sql($sql2);
@@ -93,11 +111,11 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
         $nom[$f][2] = $liste->lastname;
         $email[$f][3] = $liste->email;
         $cours[$f][4] = $liste->shortname;
+        $roletrouver[$f][5] = $liste->id;
         $f++;
     }
 }
-// Création du fichier log.
-$monfichier = fopen($chemin, 'a+');
+
 
 // Boucle pour écrire dans le fichier log.
 for ($e = 0; $e < $f; $e++) {
@@ -110,5 +128,20 @@ for ($e = 0; $e < $f; $e++) {
     fputs($monfichier, $email[$e][3]);
     fputs($monfichier, ';');
     fputs($monfichier, $cours[$e][4]);
+    fputs($monfichier, ';');
+    switch ($roletrouver[$e][5]) {
+        case 3:
+            fputs($monfichier, 2);
+            break;
+        case 4:
+            fputs($monfichier, 3);
+            break;
+        case 5:
+            fputs($monfichier, 1);
+            break;
+        default:
+            fputs($monfichier, '?');
+            break;
+    }
     fputs($monfichier, "\n");
 }
