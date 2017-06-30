@@ -1,33 +1,34 @@
-# Désinscription Etudiant : Moodle plugin
+# User unsubscription : Moodle plugin
 
-Ce plugin est compatible avec Moodle 3.1 ou plus.
+This plugin is compatible with Moodle 3.1 or more.
 
 ## Installation
 
-Pour installer votre plugin il faudra suivre ces étapes :
+To install your plugin you will need to follow these steps:
 
-    - se connecter en mode admin
-    - se rendre à l'onglet Administration du site
-    - puis Plugins
-    - puis Installer des plugins
-    - glisser le fichier .zip à son emplacement et faire "Installer le plugin à partir du fichier zip"
-    - suivre les étapes et voila votre plugin ests prêt
+    - Login in admin mode
+    - Go to administration section
+    - Plugin
+    - Install plugins
+    - Rename this .zip file to "filtered_bulk_unenrollment"
+    - Drag the .zip file to his location and do "Install the plugin from the zip file"
+    - Follow the steps and your plugin is ready
 
-## Accéder à son plugin
+## Accessing the plugin
 
-Si votre installation s'est déroulé correctement voici comment se rendre à votre plugin.
+If your installation have no error, you can to access at your plugin like this:
 
-    - Être connecter en admin
-    - se rendre à l'onglet Administration du site
-    - Serveur
-    - Enfin votre plugin : "Désinscription étudiant"
+    - Login to admin
+    - Go to administration section
+    - Server
+    - Finally your plugin: "Filtered Bulk Unenrollment"
 
-## Fonctionnalités de plugin de désinscription :
+## Unsubscription plugin features:
 
-    - Reconnu et fonctionnel lors de l’installation du plugin
-    - Lit les informations contenues dans le fichier listant les cours au format CSV
-    - Désinscrit les étudiants des cours contenus dans le fichier précédent
-    - Possibilité d’obtenir un fichier log contenant la liste des étudiants désinscrits accompagnée du cours
+    - Recognized and functional when installing the plugin
+    - Read the information contained in the CSV file listing the courses
+    - Unsubscribes the users of the courses contained in the previous file
+    - Possibility of obtaining a log file containing the list of users unsubscribed accompanied by the course
 
 ## Licence
 

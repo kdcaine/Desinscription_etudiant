@@ -23,10 +23,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Désinscription étudiant';
+$string['pluginname'] = "Désinscription d'utilisateurs";
 $string['maintitle'] = 'Affichage des cours suivi par un étudiant';
 // Traduction fichier index.
-$string['titreindex'] = "Système de désinscription d'étudiant :";
+$string['titreindex'] = "Système de désinscription d'utilisateurs :";
 $string['emplacement'] = 'Veuillez uploader votre fichier à cet emplacement pour permettre la désinscription : ';
 $string['fichier'] = 'Votre fichier : ';
 $string['envoyer'] = 'envoyer';

@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Filtered Bulk Unenrollment';
 $string['maintitle'] = 'Main page title';
 // Traduction fichier index.
-$string['titreindex'] = 'Student unsubscription system: ';
+$string['titreindex'] = 'User unsubscription system: ';
 $string['emplacement'] = 'Please upload your file to this location for unsubscription: ';
 $string['fichier'] = 'Your file: ';
 $string['envoyer'] = 'send';
