@@ -23,37 +23,37 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Unenroll student courses';
+$string['pluginname'] = 'Filtered Bulk Unenrollment';
 $string['maintitle'] = 'Main page title';
 // Traduction fichier index.
-$string['titreindex'] = 'Student unsubscribe system : ';
-$string['emplacement'] = 'Please upload your file to this location for unsubscription : ';
-$string['fichier'] = 'Your file : ';
+$string['titreindex'] = 'Student unsubscription system: ';
+$string['emplacement'] = 'Please upload your file to this location for unsubscription: ';
+$string['fichier'] = 'Your file: ';
 $string['envoyer'] = 'send';
-$string['notice'] = 'Instructions for use : ';
-$string['format'] = "Your file is a CSV file and must be written as 'course shortname, registration method, roles'";
-$string['methode'] = 'We have different enrollment methods :';
-$string['methode1'] = 'manual : manual enroll by teacher';
+$string['notice'] = 'Instructions: ';
+$string['format'] = "Your file is a CSV and must be written as 'course shortname, registration method, roles'";
+$string['methode'] = 'Enrollment methods:';
+$string['methode1'] = 'manual : manual enrollment by teacher';
 $string['methode2'] = 'self   : auto-enrollment';
 $string['methode3'] = 'guest';
-$string['rolepossible'] = 'Différent role : ';
+$string['rolepossible'] = 'Roles : ';
 $string['role1'] = '1 : Student';
-$string['role2'] = '2 : Teacher';
-$string['role3'] = '3 : Assistant Teacher';
-$string['noticeexemple'] = 'An example of writing for a line in your file : ';
+$string['role2'] = '2 : Editing Teacher';
+$string['role3'] = '3 : Teacher';
+$string['noticeexemple'] = 'Example of line in your file: ';
 $string['example'] = 'coursName;manual;1';
 // Traduction fichier lecture.
-$string['titrelecture'] = 'Read CSV file upload :';
-$string['filecsv'] = 'CSV file upload : ';
-$string['namecours'] = 'Course name : ';
-$string['type'] = 'Enrollment type : ';
-$string['role'] = 'Role : ';
-$string['novalide'] = 'No files present or invalid file !';
+$string['titrelecture'] = 'CSV file analysis:';
+$string['filecsv'] = 'CSV file name: ';
+$string['namecours'] = 'Course name: ';
+$string['type'] = 'Enrollment type: ';
+$string['role'] = 'Role: ';
+$string['novalide'] = 'No file detected or invalid file !';
 $string['listeuser'] = 'List of users selected for unsubscription:';
 $string['prenom'] = 'Firstname';
 $string['nom'] = 'Lastname';
 $string['cours'] = 'Course';
-$string['confirmer'] = 'Please confirm your action :';
+$string['confirmer'] = 'Please confirm your action:';
 $string['d'] = 'UNSUBSCRIBE';
 $string['dl'] = 'UNSUBSCRIBE + LOG';
 $string['annuler'] = 'CANCEL';
