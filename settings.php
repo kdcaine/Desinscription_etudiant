@@ -16,14 +16,14 @@
 
 /**
  * Add page to admin menu.
- * @package    tool_desinscription_etudiant
+ * @package    tool_filtered_bulk_unenrollment
  * @copyright  2017 Puagnol André John
  */
 
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) { // Needs this condition or there is error on login page.
-    $ADMIN->add('server', new admin_externalpage('tool_desinscription_etudiant',
-            get_string('pluginname', 'tool_desinscription_etudiant'),
-            new moodle_url('/admin/tool/desinscription_etudiant/index.php')));
+    $ADMIN->add('server', new admin_externalpage('tool_filtered_bulk_unenrollment',
+            get_string('pluginname', 'tool_filtered_bulk_unenrollment'),
+            new moodle_url('/admin/tool/filtered_bulk_unenrollment/index.php')));
 }

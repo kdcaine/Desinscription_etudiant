@@ -17,7 +17,7 @@
 /**
  * savePopUp.php
  *
- * @package    tool_description_etudiant
+ * @package    tool_filtered_bulk_unenrollment
  * @copyright  2017 Puagnol André John
  */
 
@@ -33,15 +33,15 @@ session_start();
 
 ?>
 <html>
-    <body onload="setTimeout(window.close, 10000)">
+    <body onload="setTimeout(window.close, 8000)">
             <!-- Bouton de redirection à la page principale du plugin --> 
             <center>
 
             <br />
-            <h5> <?php echo get_string('titresave', 'tool_desinscription_etudiant'); ?></h5>
+            <h5> <?php echo get_string('titresave', 'tool_filtered_bulk_unenrollment'); ?></h5>
             
             <form name="x" action="suppression.php" method="post">
-                <input type="submit" value="<?php echo get_string('boutonconfirmer', 'tool_desinscription_etudiant'); ?>">
+                <input type="submit" value="<?php echo get_string('boutonconfirmer', 'tool_filtered_bulk_unenrollment'); ?>">
             </form>
            
             </center>
@@ -115,7 +115,6 @@ for ($c = 0; $c < $_SESSION['$taille']; $c++) {
         $f++;
     }
 }
-
 
 // Boucle pour écrire dans le fichier log.
 for ($e = 0; $e < $f; $e++) {

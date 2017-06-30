@@ -17,7 +17,7 @@
 /**
  * Version details.
  *
- * @package    tool_desinscription_etudiant
+ * @package    tool_filtered_bulk_unenrollment
  * @copyright  2017 Puagnol André John
  */
 
@@ -29,4 +29,4 @@ $plugin->version  = 2017063000;
 $plugin->release = '1.0';
 $plugin->requires = 2015051103;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->component = 'tool_desinscription_etudiant';// Nom complet du plugin (pour diagnostic).
+$plugin->component = 'tool_filtered_bulk_unenrollment';// Nom complet du plugin (pour diagnostic).

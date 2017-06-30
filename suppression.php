@@ -17,7 +17,7 @@
 /**
  * suppression.php
  *
- * @package    tool_description_etudiant
+ * @package    tool_filtered_bulk_unenrollment
  * @copyright  2017 Puagnol André John
  */
 

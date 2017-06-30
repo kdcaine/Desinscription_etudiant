@@ -17,7 +17,7 @@
 /**
  * Lecture et validation désinscription
  *
- * @package    tool_desinscription_etudiant
+ * @package    tool_filtered_bulk_unenrollment
  * @copyright  2017 Puagnol André John
  */
 
@@ -25,13 +25,13 @@ require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once("$CFG->libdir/dml/moodle_database.php");
 
-admin_externalpage_setup('tool_desinscription_etudiant');
+admin_externalpage_setup('tool_filtered_bulk_unenrollment');
 
 $PAGE->set_context(context_system::instance());
 $PAGE->set_pagelayout('admin');
-$strheading = get_string('pluginname', 'tool_desinscription_etudiant');
+$strheading = get_string('pluginname', 'tool_filtered_bulk_unenrollment');
 $PAGE->set_title($strheading);
-$PAGE->set_heading('Désinscription d\'étudiant');
+$PAGE->set_heading($strheading);
 
 echo $OUTPUT->header();
 
@@ -40,7 +40,7 @@ global $DB;
 
 ?>
     <center>
-        <h1><?php echo get_string('titrelecture', 'tool_desinscription_etudiant'); ?></h1> 
+        <h1><?php echo get_string('titrelecture', 'tool_filtered_bulk_unenrollment'); ?></h1> 
     </center>
 <?php
 
@@ -63,7 +63,7 @@ echo '<br>';
 if (isset($_POST['upload'])) {
     $fname = $_FILES['sel_file']['name'];
     echo '<br>';
-    $fileupload = get_string('filecsv', 'tool_desinscription_etudiant');
+    $fileupload = get_string('filecsv', 'tool_filtered_bulk_unenrollment');
     echo $fileupload.$fname.' ';
 
     $chkext = explode(".", $fname);
@@ -117,11 +117,11 @@ if (isset($_POST['upload'])) {
                 $compterole++;
             }
 
-            echo get_string('namecours', 'tool_desinscription_etudiant').$data[0];
+            echo get_string('namecours', 'tool_filtered_bulk_unenrollment').$data[0];
             echo '<br>';
-            echo get_string('type', 'tool_desinscription_etudiant').$typeinscription;
+            echo get_string('type', 'tool_filtered_bulk_unenrollment').$typeinscription;
             echo '<br>';
-            echo get_string('role', 'tool_desinscription_etudiant').$role;
+            echo get_string('role', 'tool_filtered_bulk_unenrollment').$role;
             echo '<br>';
 
             array_push($stockdonnee, $data);
@@ -157,21 +157,21 @@ if (isset($_POST['upload'])) {
             $_SESSION['nomCours'][$c] = $stockdonnee[$c][0];
         }
     } else {
-        echo get_string('novalide', 'tool_desinscription_etudiant');
+        echo get_string('novalide', 'tool_filtered_bulk_unenrollment');
     }
 }
 ?>
             <center>
-            <p> <?php echo get_string('listeuser', 'tool_desinscription_etudiant'); ?></p>
+            <p> <?php echo get_string('listeuser', 'tool_filtered_bulk_unenrollment'); ?></p>
             </center>
             <div style="overflow:scroll; border:#7FDD4C 3px solid;">
             <center>
             <table>
                 <tr>
                    <th>Login</th>
-                   <th><?php echo get_string('prenom', 'tool_desinscription_etudiant'); ?></th>
-                   <th><?php echo get_string('nom', 'tool_desinscription_etudiant'); ?></th>
-                   <th><?php echo get_string('cours', 'tool_desinscription_etudiant'); ?></th>
+                   <th><?php echo get_string('prenom', 'tool_filtered_bulk_unenrollment'); ?></th>
+                   <th><?php echo get_string('nom', 'tool_filtered_bulk_unenrollment'); ?></th>
+                   <th><?php echo get_string('cours', 'tool_filtered_bulk_unenrollment'); ?></th>
                 </tr>
                 <tr>
 <?php
@@ -231,7 +231,7 @@ for ($e = 0; $e < $d; $e++) {
             <br />
 
             <center>
-            <p><?php echo get_string('confirmer', 'tool_desinscription_etudiant'); ?></p>
+            <p><?php echo get_string('confirmer', 'tool_filtered_bulk_unenrollment'); ?></p>
            
 
             <!-- Bouton de redirection à la page principale du plugin -->
@@ -241,18 +241,18 @@ for ($e = 0; $e < $d; $e++) {
             <tr> 
             <td> 
             <form action="index.php" onsubmit="window.open('suppIndex.php','popup','width=200, height=10')"  method="post">
-                <input type="submit" value="<?php echo get_string('d', 'tool_desinscription_etudiant'); ?>">
+                <input type="submit" value="<?php echo get_string('d', 'tool_filtered_bulk_unenrollment'); ?>">
             </form>
             </td>
             <td>
             <form action="index.php" onsubmit="window.open('savePopUp.php','popup','width=300, height=300')" method="post">
-                <input type="submit" value="<?php echo get_string('dl', 'tool_desinscription_etudiant'); ?>">
+                <input type="submit" value="<?php echo get_string('dl', 'tool_filtered_bulk_unenrollment'); ?>">
             </form>
             </td>
             <td>
             <!-- Bouton pour annuler le processus --> 
             <form name="x" action="index.php" method="post">
-                <input type="submit" value="<?php echo get_string('annuler', 'tool_desinscription_etudiant'); ?>">
+                <input type="submit" value="<?php echo get_string('annuler', 'tool_filtered_bulk_unenrollment'); ?>">
             </form>
             </td>
             </tr> 

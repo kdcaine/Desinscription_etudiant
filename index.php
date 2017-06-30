@@ -17,20 +17,20 @@
 /**
  * Main info
  *
- * @package    tool_cours_etudiant
+ * @package    tool_filtered_bulk_unenrollment
  * @copyright  2017 Puagnol André John
  */
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
 require_once($CFG->libdir.'/adminlib.php');
 
-admin_externalpage_setup('tool_desinscription_etudiant');
+admin_externalpage_setup('tool_filtered_bulk_unenrollment');
 
 $PAGE->set_context(context_system::instance());
 $PAGE->set_pagelayout('admin');
-$strheading = get_string('pluginname', 'tool_desinscription_etudiant');
+$strheading = get_string('pluginname', 'tool_filtered_bulk_unenrollment');
 $PAGE->set_title($strheading);
-$PAGE->set_heading('Désinscription d\'étudiant');
+$PAGE->set_heading($strheading);
 
 echo $OUTPUT->header();
 ?>
@@ -39,37 +39,37 @@ echo $OUTPUT->header();
 <html>
     
     <center>
-        <h1><?php echo get_string('titreindex', 'tool_desinscription_etudiant'); ?></h1> 
+        <h1><?php echo get_string('titreindex', 'tool_filtered_bulk_unenrollment'); ?></h1> 
     </center>
 
     <body>
             <br />
-            <p><?php echo get_string('emplacement', 'tool_desinscription_etudiant'); ?></p>
+            <p><?php echo get_string('emplacement', 'tool_filtered_bulk_unenrollment'); ?></p>
             <br />
             <form action="lecture.php" method='post' enctype="multipart/form-data">
-                <?php echo get_string('fichier', 'tool_desinscription_etudiant'); ?><input type='file' name='sel_file' size='20'>
-                <input type='submit' name='upload' value="<?php echo get_string('envoyer', 'tool_desinscription_etudiant'); ?>">
+                <?php echo get_string('fichier', 'tool_filtered_bulk_unenrollment'); ?><input type='file' name='sel_file' size='20'>
+                <input type='submit' name='upload' value="<?php echo get_string('envoyer', 'tool_filtered_bulk_unenrollment'); ?>">
             </form>
             <br />
             <br />
-            <center><h4><?php echo get_string('notice', 'tool_desinscription_etudiant'); ?></h4></center>
+            <center><h4><?php echo get_string('notice', 'tool_filtered_bulk_unenrollment'); ?></h4></center>
 
-            <p><?php echo get_string('format', 'tool_desinscription_etudiant'); ?></p>
-            <p><?php echo get_string('methode', 'tool_desinscription_etudiant'); ?></p>
+            <p><?php echo get_string('format', 'tool_filtered_bulk_unenrollment'); ?></p>
+            <p><?php echo get_string('methode', 'tool_filtered_bulk_unenrollment'); ?></p>
             <ul>
-              <li><?php echo get_string('methode1', 'tool_desinscription_etudiant'); ?></li>
-              <li><?php echo get_string('methode2', 'tool_desinscription_etudiant'); ?></li>
-              <li><?php echo get_string('methode3', 'tool_desinscription_etudiant'); ?></li>
+              <li><?php echo get_string('methode1', 'tool_filtered_bulk_unenrollment'); ?></li>
+              <li><?php echo get_string('methode2', 'tool_filtered_bulk_unenrollment'); ?></li>
+              <li><?php echo get_string('methode3', 'tool_filtered_bulk_unenrollment'); ?></li>
             </ul>
-            <p><?php echo get_string('rolepossible', 'tool_desinscription_etudiant'); ?></p>
+            <p><?php echo get_string('rolepossible', 'tool_filtered_bulk_unenrollment'); ?></p>
             <ul>
-              <li><?php echo get_string('role1', 'tool_desinscription_etudiant'); ?></li>
-              <li><?php echo get_string('role2', 'tool_desinscription_etudiant'); ?></li>
-              <li><?php echo get_string('role3', 'tool_desinscription_etudiant'); ?></li>
+              <li><?php echo get_string('role1', 'tool_filtered_bulk_unenrollment'); ?></li>
+              <li><?php echo get_string('role2', 'tool_filtered_bulk_unenrollment'); ?></li>
+              <li><?php echo get_string('role3', 'tool_filtered_bulk_unenrollment'); ?></li>
             </ul>
             <br />
-            <p><?php echo get_string('noticeexemple', 'tool_desinscription_etudiant'); ?></p>
-            <center><p><?php echo get_string('example', 'tool_desinscription_etudiant'); ?></p></center>
+            <p><?php echo get_string('noticeexemple', 'tool_filtered_bulk_unenrollment'); ?></p>
+            <center><p><?php echo get_string('example', 'tool_filtered_bulk_unenrollment'); ?></p></center>
     </body>
 </html>  
 

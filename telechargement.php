@@ -17,7 +17,7 @@
 /**
  * telechargement.php
  *
- * @package    tool_desinscription_etudiant
+ * @package    tool_filtered_bulk_unenrollment
  * @copyright  2017 Puagnol André John
  */
 
@@ -28,6 +28,6 @@ $b = substr($a, 0, -2);
 $c = str_replace("\\", "/", $b);
 $chemin = $c.'suppression.csv';
 header('Content-Transfer-Encoding: binary');
-header('Content-Disposition: attachment; filename="liste-etudiant-désinscrit.csv"');
+header('Content-Disposition: attachment; filename="liste-utilisateurs-désinscrit.csv"');
 header("Pragma: public");
 readfile($chemin);
